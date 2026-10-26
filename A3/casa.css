@@ -1,0 +1,40 @@
+
+.texto{
+    font-size: 50px;
+}
+
+
+
+.botoes{
+margin-top: 28px;
+margin-bottom: 34px;
+}
+
+
+button{
+background: #D8F3DC;
+border: none;
+border-radius: 10px;
+height: 26px;
+cursor: pointer;
+
+}
+
+button:hover{
+    color: white;
+    background: #1B4332;
+}
+
+
+.choco{
+
+}
+
+
+.embaixo{
+    background-color: #1B4332;
+    width: 100%;
+    height: 100px;
+    margin: 0px;
+}
+
