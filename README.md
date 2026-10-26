@@ -1,7 +1,6 @@
 # Projeto-A3
-
+# Passos iniciais
 Abra o codespace pelo github
-
 Abra um novo terminal e nele digite
 
 # 1. Puxe as atualizações
@@ -10,7 +9,8 @@ git pull origin main
 # 2. Inicie o site
 python3 -m http.server 8000
 
-Para subir as modificações feitas, digite no terminal
+# Para subir as modificações feitas
+digite no terminal
 
 # 1. Para adicionar todas as alterações feitas
 git add .
