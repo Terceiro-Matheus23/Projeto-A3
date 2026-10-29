@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+* {
+    font-family: "Itim", cursive;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #FAF7F2;
+    color: #1B4332;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 100px;
+}
+
+/* Header */
+header {
+    background: #FFFFFF;
+    padding: 16px 20px 12px;
+    box-shadow: 0 4px 15px rgba(27, 67, 50, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid #ECECEC;
+}
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 960px;
+    margin: 0 auto 10px;
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo {
+    width: 38px;
+    height: auto;
+}
+
+.texto {
+    font-size: 26px;
+    color: #1B4332;
+    font-weight: bold;
+}
+
+.tag-cliente {
+    background: #F4F8F5;
+    border: 1.5px solid #D8F3DC;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #1B4332;
+}
+
+.tag-cliente:hover {
+    background: #D8F3DC;
+}
+
+input {
+    width: 100%;
+    max-width: 960px;
+    display: block;
+    margin: 0 auto;
+    padding: 10px 16px;
+    border: 1.5px solid #D8F3DC;
+    border-radius: 20px;
+    font-size: 15px;
+    outline: none;
+    background: #F9FAF9;
+}
+
+input:focus {
+    border-color: #1B4332;
+    background: #FFFFFF;
+}
+
+/* Categorias */
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 16px auto;
+    padding: 0 16px;
+    max-width: 960px;
+    overflow-x: auto;
+}
+
+button {
+    background: #D8F3DC;
+    color: #1B4332;
+    border: none;
+    border-radius: 16px;
+    padding: 8px 16px;
+    min-height: 38px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+button:hover, button.ativo {
+    background: #1B4332;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+}
+
+/* Grid de Produtos */
+.principal {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    max-width: 960px;
+    margin: 0 auto;
+    gap: 18px;
+    padding: 10px 16px;
+    width: 100%;
+}
+
+.card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    border: 1.5px solid #EAEFEA;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    position: relative;
+    transition: all 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(27, 67, 50, 0.12);
+    border-color: #B7E4C7;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.badge.rosa {
+    background: #FFF0F3;
+    color: #C94A67;
+}
+
+.badge.dourado {
+    background: #FFF9DB;
+    color: #8C6D00;
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card-info {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-info h3 {
+    font-size: 18px;
+    color: #1B4332;
+    margin-bottom: 4px;
+}
+
+.card-info .desc {
+    font-size: 13.5px;
+    color: #52796F;
+    margin-bottom: 12px;
+    line-height: 1.35;
+    flex-grow: 1;
+}
+
+.preco-linha {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px dashed #D8F3DC;
+    padding-top: 10px;
+}
+
+.preco-linha span:first-child {
+    font-size: 19px;
+    font-weight: bold;
+    color: #1B4332;
+}
+
+.btn-pedir {
+    background: #1B4332;
+    color: #FFFFFF;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-size: 13.5px;
+    font-weight: bold;
+}
+
+/* Barra Inferior */
+.embaixo {
+    background: #1B4332;
+    width: 100%;
+    min-height: 65px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    z-index: 100;
+    border: none;
+}
+
+.embaixo-conteudo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 960px;
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+.btn-ver-cozinha {
+    background: #D8F3DC;
+    color: #1B4332;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 14px;
+}

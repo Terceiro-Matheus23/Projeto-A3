@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aroma de Casa • Cafeteria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="aroma.css">
+</head>
+<body>
+    <main>
+        <img src="img/Group 1@2x.jpg" alt="Logo" class="imagem1">
+        <p>Aroma de Casa</p>
+        <span class="subtitulo">Cafeteria Artesanal • Autoatendimento na Mesa ☕</span>
+
+        <!-- Identificação do Cliente -->
+        <div class="box-identificacao">
+            <label for="input-nome">Seu Nome:</label>
+            <input type="text" id="input-nome" placeholder="Digite seu nome (ex: Beatriz)...">
+
+            <label style="margin-top: 10px;">Sua Mesa:</label>
+            <div class="mesas-grid">
+                <button type="button" class="btn-mesa" onclick="escolherMesa('Mesa 01', this)">01</button>
+                <button type="button" class="btn-mesa" onclick="escolherMesa('Mesa 02', this)">02</button>
+                <button type="button" class="btn-mesa ativo" onclick="escolherMesa('Mesa 05', this)">05</button>
+                <button type="button" class="btn-mesa" onclick="escolherMesa('Mesa 08', this)">08</button>
+            </div>
+        </div>
+
+        <button class="btn-iniciar" onclick="iniciar()">
+            <a href="inicial.html">Ver Cardápio ➔</a>
+        </button>
+    </main>
+
+    <script>
+        function escolherMesa(mesa, btn) {
+            document.querySelectorAll('.btn-mesa').forEach(b => b.classList.remove('ativo'));
+            btn.classList.add('ativo');
+            localStorage.setItem('aroma_mesa_atual', mesa);
+        }
+
+        function iniciar() {
+            const nome = document.getElementById('input-nome').value.trim() || 'Cliente';
+            localStorage.setItem('aroma_cliente_nome', nome);
+            if (!localStorage.getItem('aroma_mesa_atual')) localStorage.setItem('aroma_mesa_atual', 'Mesa 05');
+        }
+
+        // Recupera nome se já digitou
+        const salvo = localStorage.getItem('aroma_cliente_nome');
+        if (salvo && salvo !== 'Cliente') document.getElementById('input-nome').value = salvo;
+    </script>
+</body>
+</html>
