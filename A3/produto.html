@@ -3,34 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finalização</title>
+    <title>Aroma de Casa • Personalizar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="final.css">
 </head>
 <body>
     
-    <header>
-        <img src="img/Frame 9.jpg" alt="">
-    </header>
+    <div class="pagina-produto">
+        <!-- Barra de Navegação Superior -->
+        <div class="nav-topo">
+            <a href="inicial.html" class="btn-voltar">‹ Voltar ao Cardápio</a>
+            <span class="tag-mesa-produto" id="mesa-topo-badge">📍 Mesa 05</span>
+        </div>
 
+        <!-- Foto Emoldurada em Alta Resolução (Nunca Estica) -->
+        <div class="moldura-imagem">
+            <img id="prod-img" src="img/Frame 5.jpg" alt="Foto do Produto">
+        </div>
 
-     <main class="primeiro-main">
-    
-     </main>
+        <!-- Detalhes do Produto -->
+        <main class="primeiro-main">
+            <div class="header-produto">
+                <div>
+                    <h1 id="prod-nome">Cappuccino Cremoso</h1>
+                    <span id="prod-cat" class="categoria-tag">Café Especial Artesanal</span>
+                </div>
+                <span class="preco-tag" id="preco-base-tag">R$ 14,00</span>
+            </div>
 
-     <section class="meio">
+            <p id="prod-desc" class="desc-texto">Espresso nobre, leite vaporizado cremoso e canela polvilhada.</p>
 
-        <button>-</button>
-        <p></p>
-        <button>+</button>
+            <!-- 1. Tamanho da Bebida -->
+            <div class="grupo" id="secao-tamanho">
+                <label class="rotulo">Tamanho da Bebida:</label>
+                <div class="pills">
+                    <button type="button" class="pill ativo" onclick="escolherTamanho('P (200ml)', 0, this)">P (200ml)</button>
+                    <button type="button" class="pill" onclick="escolherTamanho('M (350ml)', 3.50, this)">M (350ml) +R$3,50</button>
+                    <button type="button" class="pill" onclick="escolherTamanho('G (500ml)', 6.00, this)">G (500ml) +R$6,00</button>
+                </div>
+            </div>
 
-     </section>
+            <!-- 2. Tipo de Leite -->
+            <div class="grupo" id="secao-leite">
+                <label class="rotulo">Tipo de Leite:</label>
+                <div class="pills">
+                    <button type="button" class="pill ativo" onclick="escolherLeite('Integral', 0, this)">Integral</button>
+                    <button type="button" class="pill" onclick="escolherLeite('Desnatado', 0, this)">Desnatado</button>
+                    <button type="button" class="pill" onclick="escolherLeite('Sem Lactose', 1.50, this)">Sem Lactose +R$1,50</button>
+                    <button type="button" class="pill" onclick="escolherLeite('Leite de Aveia', 3.00, this)">Aveia Vegano +R$3,00</button>
+                </div>
+            </div>
 
-    <main class="segundo-main">
-         <p>Total:   </p>
-    </main>
+            <!-- 3. Açúcar -->
+            <div class="grupo" id="secao-acucar">
+                <label class="rotulo">Nível de Açúcar:</label>
+                <div class="pills">
+                    <button type="button" class="pill" onclick="escolherAcucar('Sem Açúcar', this)">Sem Açúcar</button>
+                    <button type="button" class="pill ativo" onclick="escolherAcucar('Pouco Açúcar', this)">Pouco Açúcar</button>
+                    <button type="button" class="pill" onclick="escolherAcucar('Padrão', this)">Padrão</button>
+                    <button type="button" class="pill" onclick="escolherAcucar('Adoçante', this)">Adoçante</button>
+                </div>
+            </div>
 
+            <!-- 4. Observação livre -->
+            <div class="grupo">
+                <label class="rotulo">Observação para o Barista:</label>
+                <input type="text" id="obs-cozinha" placeholder="Ex: bem quente, copo com gelo, caprichar na canela...">
+            </div>
+        </main>
 
-    <button class="rodape"> <a href="pagar.html"  class="link">Finalizar</a></button>
+        <!-- Contador de Quantidade -->
+        <section class="meio">
+            <button type="button" onclick="alterarQtd(-1)">-</button>
+            <p id="qtd-texto">1</p>
+            <button type="button" onclick="alterarQtd(1)">+</button>
+        </section>
 
+        <!-- Total -->
+        <main class="segundo-main">
+            <p>Total do Pedido: <strong id="valor-total">R$ 14,00</strong></p>
+        </main>
+    </div>
+
+    <!-- Barra de Rodapé Fixa -->
+    <button class="rodape" onclick="enviarPedido()">
+        <span class="link">Enviar Pedido para a Cozinha ➔</span>
+    </button>
+
+    <script>
+        const PRODUTOS = {
+            cappuccino: { nome: "Cappuccino Cremoso", cat: "Café Especial Artesanal", desc: "Espresso, leite vaporizado cremoso e canela polvilhada.", preco: 14, img: "img/Frame 5.jpg?v=2", eBebida: true },
+            frappe: { nome: "Frappé de Caramelo", cat: "Bebida Gelada & Batida", desc: "Café gelado batido, calda toffee artesanal e chantilly.", preco: 18, img: "img/Frame 2.jpg?v=2", eBebida: true },
+            icecoffee: { nome: "Ice Coffee Belga", cat: "Especial Gelado da Casa", desc: "Cold Brew com ganache de puro chocolate belga e gelo.", preco: 16, img: "img/Frame 9.jpg?v=2", eBebida: true },
+            espresso: { nome: "Espresso Tradicional", cat: "100% Grãos Nobres Arábica", desc: "Grãos selecionados moídos na hora com crema espessa e dourada.", preco: 8, img: "img/Frame 4.jpg?v=2", eBebida: true },
+            croissant: { nome: "Croissant Francês", cat: "Confeitaria Artesanal", desc: "Folhado crocante por fora e macio por dentro.", preco: 15, img: "img/croissant.jpg", eBebida: false },
+            cookie: { nome: "Cookie Triplo Chocolate", cat: "Confeitaria Artesanal", desc: "Massa macia com gotas fartas de chocolate meio amargo e ao leite.", preco: 12, img: "img/cookie.jpg", eBebida: false },
+            cheesecake: { nome: "Cheesecake de Frutas", cat: "Sobremesa Especial", desc: "Creme suave com calda caseira de frutas vermelhas.", preco: 19, img: "img/cheesecake.jpg", eBebida: false },
+            bolo: { nome: "Bolo de Cenoura", cat: "Receita de Família", desc: "Bolo fofinho com ganache cremosa de brigadeiro.", preco: 14, img: "img/bolo.jpg", eBebida: false }
+        };
+
+        const paramId = new URLSearchParams(window.location.search).get('id') || 'cappuccino';
+        const itemAtual = PRODUTOS[paramId] || PRODUTOS.cappuccino;
+
+        let qtd = 1, tamNome = 'P (200ml)', extraTam = 0, leiteNome = 'Integral', extraLeite = 0, acucarNome = 'Pouco Açúcar';
+
+        // Preenche dados
+        document.getElementById('prod-nome').innerText = itemAtual.nome;
+        document.getElementById('prod-cat').innerText = itemAtual.cat;
+        document.getElementById('prod-desc').innerText = itemAtual.desc;
+        document.getElementById('prod-img').src = itemAtual.img;
+
+        const mesaAtual = localStorage.getItem('aroma_mesa_atual') || 'Mesa 05';
+        const nomeAtual = localStorage.getItem('aroma_cliente_nome') || 'Cliente';
+        document.getElementById('mesa-topo-badge').innerText = `📍 ${mesaAtual} • ${nomeAtual}`;
+
+        // Se for comida, esconde opções de bebida
+        if (!itemAtual.eBebida) {
+            document.getElementById('secao-tamanho').style.display = 'none';
+            document.getElementById('secao-leite').style.display = 'none';
+            document.getElementById('secao-acucar').style.display = 'none';
+            tamNome = 'Quentinho do Forno';
+        }
+
+        function atualizarTotal() {
+            const unit = itemAtual.preco + extraTam + extraLeite;
+            const total = unit * qtd;
+            document.getElementById('valor-total').innerText = 'R$ ' + total.toFixed(2).replace('.', ',');
+            document.getElementById('qtd-texto').innerText = qtd;
+        }
+
+        function alterarQtd(d) {
+            if (qtd + d >= 1) { qtd += d; atualizarTotal(); }
+        }
+
+        function escolherTamanho(nome, extra, btn) {
+            btn.parentElement.querySelectorAll('.pill').forEach(b => b.classList.remove('ativo'));
+            btn.classList.add('ativo');
+            tamNome = nome; extraTam = extra; atualizarTotal();
+        }
+
+        function escolherLeite(nome, extra, btn) {
+            btn.parentElement.querySelectorAll('.pill').forEach(b => b.classList.remove('ativo'));
+            btn.classList.add('ativo');
+            leiteNome = nome; extraLeite = extra; atualizarTotal();
+        }
+
+        function escolherAcucar(nome, btn) {
+            btn.parentElement.querySelectorAll('.pill').forEach(b => b.classList.remove('ativo'));
+            btn.classList.add('ativo');
+            acucarNome = nome;
+        }
+
+        function enviarPedido() {
+            const obs = document.getElementById('obs-cozinha').value.trim();
+            const cliente = localStorage.getItem('aroma_cliente_nome') || 'Cliente';
+            const mesa = localStorage.getItem('aroma_mesa_atual') || 'Mesa 05';
+            const totalStr = document.getElementById('valor-total').innerText;
+
+            const novoPedido = {
+                id: 'AC-' + Math.floor(1000 + Math.random() * 9000),
+                cliente: cliente,
+                mesa: mesa,
+                item: itemAtual.nome,
+                quantidade: qtd,
+                detalhes: itemAtual.eBebida ? `${tamNome} • Leite: ${leiteNome} • Açúcar: ${acucarNome}` : 'Quentinho do Forno',
+                observacao: obs || 'Sem observações adicionais',
+                total: totalStr,
+                horario: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                status: 'Em Preparo'
+            };
+
+            let pedidos = JSON.parse(localStorage.getItem('aroma_pedidos_cozinha') || '[]');
+            pedidos.unshift(novoPedido);
+            localStorage.setItem('aroma_pedidos_cozinha', JSON.stringify(pedidos));
+            localStorage.setItem('aroma_ultimo_pedido', JSON.stringify(novoPedido));
+
+            window.location.href = 'pagar.html';
+        }
+
+        atualizarTotal();
+    </script>
 </body>
 </html>

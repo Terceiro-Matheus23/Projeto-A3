@@ -3,44 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aroma de Casa</title>
+    <title>Aroma de Casa • Cardápio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="casa.css">
 </head>
 <body>
 
-    <header> 
-        <p class="texto"> Aroma de Casa</p>
-        <input placeholder="Digite">
+    <header>
+        <div class="topo">
+            <a href="coffee.html" class="marca">
+                <img src="img/Group 1@2x.jpg" alt="Logo" class="logo">
+                <p class="texto">Aroma de Casa</p>
+            </a>
+            <div class="tag-cliente" onclick="trocarNome()" title="Clique para trocar o nome">
+                <span id="nome-topo">Olá, Beatriz!</span> • <strong id="mesa-topo">Mesa 05</strong>
+            </div>
+        </div>
+
+        <input type="text" id="campo-busca" placeholder="🔍 Buscar café ou doce...">
     </header>
 
+    <!-- Botões de Categoria -->
     <section class="botoes">
-         <button  class="todes">Todos</button>
-         <button  class="Caps">Cappucino</button>
-         <button class="america">Americano</button>
-         <button class="espres">Espresso</button>
+        <button class="todes ativo" onclick="filtrar('todos', this)">☕ Todos</button>
+        <button class="Caps" onclick="filtrar('cappuccino', this)">🥛 Cappuccinos</button>
+        <button class="america" onclick="filtrar('gelados', this)">🧊 Gelados</button>
+        <button class="espres" onclick="filtrar('espresso', this)">⚡ Espressos</button>
+        <button class="lanches" onclick="filtrar('lanches', this)">🥐 Doces & Lanches</button>
     </section>
 
-    <main class="principal"> 
+    <!-- Grade de Produtos -->
+    <main class="principal">
+        <!-- 1. Cappuccino Cremoso -->
+        <a href="produto.html?id=cappuccino" class="card" data-cat="cappuccino" data-nome="cappuccino cremoso leite canela">
+            <span class="badge rosa">❤️ Queridinho</span>
+            <img src="img/Frame 5.jpg?v=2" alt="Cappuccino">
+            <div class="card-info">
+                <h3>Cappuccino Cremoso</h3>
+                <p class="desc">Espresso nobre, leite vaporizado cremoso e canela polvilhada.</p>
+                <div class="preco-linha"><span>R$ 14,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
 
-        <img src="img/Frame 5.jpg" alt="">
+        <!-- 2. Frappé de Caramelo -->
+        <a href="produto.html?id=frappe" class="card" data-cat="gelados" data-nome="frappe caramelo gelado doce chantilly">
+            <span class="badge">🧊 Gelado</span>
+            <img src="img/Frame 2.jpg?v=2" alt="Frappé">
+            <div class="card-info">
+                <h3>Frappé de Caramelo</h3>
+                <p class="desc">Café gelado batido, calda artesanal de caramelo e chantilly.</p>
+                <div class="preco-linha"><span>R$ 18,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
 
-        <img src="img/Frame 2.jpg" alt="">
-      
-     
+        <!-- 3. Ice Coffee Belga -->
+        <a href="produto.html?id=icecoffee" class="card" data-cat="gelados" data-nome="ice coffee belga chocolate gelado">
+            <span class="badge dourado">⭐ Mais Pedido</span>
+            <img src="img/Frame 9.jpg?v=2" alt="Ice Coffee">
+            <div class="card-info">
+                <h3>Ice Coffee Belga</h3>
+                <p class="desc">Cold Brew especial com puro chocolate belga e cubos de gelo.</p>
+                <div class="preco-linha"><span>R$ 16,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
 
-    <a href="produto.html">
+        <!-- 4. Espresso Tradicional -->
+        <a href="produto.html?id=espresso" class="card" data-cat="espresso" data-nome="espresso tradicional forte puro arabica">
+            <span class="badge">⚡ 100% Arábica</span>
+            <img src="img/Frame 4.jpg?v=2" alt="Espresso Tradicional">
+            <div class="card-info">
+                <h3>Espresso Tradicional</h3>
+                <p class="desc">Grãos nobres moídos na hora, corpo denso e crema dourada.</p>
+                <div class="preco-linha"><span>R$ 8,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
 
- <img src="img/Frame 9.jpg" alt="">
+        <!-- 5. Croissant Francês -->
+        <a href="produto.html?id=croissant" class="card" data-cat="lanches" data-nome="croissant frances amanteigado quentinho lanche">
+            <span class="badge dourado">🥐 Fornada</span>
+            <img src="img/croissant.jpg" alt="Croissant">
+            <div class="card-info">
+                <h3>Croissant Francês</h3>
+                <p class="desc">Folhado artesanal amanteigado, crocante por fora e macio por dentro.</p>
+                <div class="preco-linha"><span>R$ 15,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
 
-    </a>
-        
-        <img src="img/Frame 4.jpg" alt="">
+        <!-- 6. Cookie Triplo Chocolate -->
+        <a href="produto.html?id=cookie" class="card" data-cat="lanches" data-nome="cookie chocolate doce gotas sobremesa">
+            <span class="badge rosa">🍪 Feito Hoje</span>
+            <img src="img/cookie.jpg" alt="Cookie">
+            <div class="card-info">
+                <h3>Cookie Triplo Chocolate</h3>
+                <p class="desc">Massa macia com generosas gotas de chocolate meio amargo e ao leite.</p>
+                <div class="preco-linha"><span>R$ 12,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
+
+        <!-- 7. Cheesecake de Frutas -->
+        <a href="produto.html?id=cheesecake" class="card" data-cat="lanches" data-nome="cheesecake frutas vermelhas fatia bolo doce">
+            <span class="badge rosa">🍓 Caseiro</span>
+            <img src="img/cheesecake.jpg" alt="Cheesecake">
+            <div class="card-info">
+                <h3>Cheesecake de Frutas</h3>
+                <p class="desc">Creme suave com calda artesanal de amora, framboesa e morango.</p>
+                <div class="preco-linha"><span>R$ 19,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
+
+        <!-- 8. Bolo de Cenoura com Ganache -->
+        <a href="produto.html?id=bolo" class="card" data-cat="lanches" data-nome="bolo cenoura chocolate ganache artesanal fatia">
+            <span class="badge">🍰 Fofinho</span>
+            <img src="img/bolo.jpg" alt="Bolo">
+            <div class="card-info">
+                <h3>Bolo Artesanal de Cenoura</h3>
+                <p class="desc">Massa fofinha com cobertura cremosa de ganache de brigadeiro.</p>
+                <div class="preco-linha"><span>R$ 14,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
     </main>
 
-
-    <button class="embaixo"> 
-
+    <!-- Barra Inferior do Tablet -->
+    <button class="embaixo" onclick="window.location.href='pagar.html'">
+        <div class="embaixo-conteudo">
+            <span>📍 <strong id="dock-mesa">Mesa 05</strong> • Pedido Direto para a Cozinha</span>
+            <span class="btn-ver-cozinha">Ver Comanda / Cozinha ➔</span>
+        </div>
     </button>
-    
+
+    <script>
+        // Sincroniza dados da mesa e cliente
+        const nomeAtual = localStorage.getItem('aroma_cliente_nome') || 'Cliente';
+        const mesaAtual = localStorage.getItem('aroma_mesa_atual') || 'Mesa 05';
+        document.getElementById('nome-topo').innerText = `Olá, ${nomeAtual}! ✨`;
+        document.getElementById('mesa-topo').innerText = mesaAtual;
+        document.getElementById('dock-mesa').innerText = `${mesaAtual} (${nomeAtual})`;
+
+        function trocarNome() {
+            const novo = prompt('Qual é o seu nome para a comanda?', nomeAtual);
+            if (novo && novo.trim()) {
+                localStorage.setItem('aroma_cliente_nome', novo.trim());
+                location.reload();
+            }
+        }
+
+        // Filtro por categoria
+        function filtrar(categoria, btn) {
+            document.querySelectorAll('.botoes button').forEach(b => b.classList.remove('ativo'));
+            btn.classList.add('ativo');
+            document.querySelectorAll('.card').forEach(c => {
+                c.style.display = (categoria === 'todos' || c.getAttribute('data-cat') === categoria) ? 'flex' : 'none';
+            });
+        }
+
+        // Busca em tempo real
+        document.getElementById('campo-busca').addEventListener('input', (e) => {
+            const termo = e.target.value.toLowerCase().trim();
+            document.querySelectorAll('.card').forEach(c => {
+                c.style.display = c.getAttribute('data-nome').includes(termo) ? 'flex' : 'none';
+            });
+        });
+    </script>
 </body>
 </html>
