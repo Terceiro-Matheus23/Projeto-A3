@@ -56,14 +56,14 @@
     <div class="card-confirmacao">
         <div class="check-circulo">✓</div>
         <h2 id="titulo-sucesso">Pedido Enviado!</h2>
-        <span class="tag-sem-pagamento">💚 Autoatendimento na Mesa (Sem Cobrança no Tablet)</span>
+        <span class="tag-sem-pagamento"> Autoatendimento na Mesa (Sem Cobrança no Tablet)</span>
 
         <div class="detalhes-comanda">
             <div class="linha"><span>Comanda:</span><strong id="pedido-id">#AC-7821</strong></div>
             <div class="linha"><span>Mesa & Cliente:</span><strong id="pedido-mesa">Mesa 05 • Beatriz</strong></div>
             <div class="linha"><span>Item:</span><strong id="pedido-item">1x Cappuccino Cremoso</strong></div>
             <div class="linha" style="font-size: 13.5px; color: #52796F;"><span id="pedido-specs">P (200ml) • Leite Integral</span></div>
-            <div class="obs-box" id="box-obs">📝 <span id="pedido-obs">Caprichar na canela</span></div>
+            <div class="obs-box" id="box-obs"> <span id="pedido-obs">Caprichar na canela</span></div>
             <div class="linha"><span>Total:</span><span id="pedido-total" style="color: #1B4332;">R$ 14,00</span></div>
         </div>
 
@@ -76,15 +76,15 @@
 
         <div class="botoes-acao">
             <a href="inicial.html" class="btn btn-primario">+ Fazer Outro Pedido</a>
-            <button type="button" class="btn btn-secundario" onclick="alternarCozinha()">Painel da Cozinha 🍳</button>
+            <button type="button" class="btn btn-secundario" onclick="alternarCozinha()">Painel da Cozinha </button>
         </div>
     </div>
 
     <!-- Painel KDS (Cozinha) -->
     <section class="painel-cozinha" id="secao-cozinha" style="display: none;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h3>🍳 Painel de Pedidos do Barista (KDS)</h3>
-            <button type="button" onclick="tocarSino()" style="padding: 4px 10px; border-radius: 10px; border: 1px solid #D8F3DC; background: #FFF; cursor: pointer;">🔔 Tocar Sino</button>
+            <h3> Painel de Pedidos do Barista (KDS)</h3>
+            <button type="button" onclick="tocarSino()" style="padding: 4px 10px; border-radius: 10px; border: 1px solid #D8F3DC; background: #FFF; cursor: pointer;"> Tocar Sino</button>
         </div>
         <p style="font-size: 13px; color: #52796F; margin-top: 4px;">Pedidos recebidos dos tablets das mesas em tempo real.</p>
         <div id="lista-kds"></div>
@@ -111,11 +111,11 @@
         const nomeCliente = (ultimo && ultimo.cliente) || localStorage.getItem('aroma_cliente_nome') || 'Cliente';
         const mesaCliente = (ultimo && ultimo.mesa) || localStorage.getItem('aroma_mesa_atual') || 'Mesa 05';
 
-        document.getElementById('titulo-sucesso').innerText = (nomeCliente !== 'Cliente') ? `Pedido de ${nomeCliente} Enviado! ✨` : 'Pedido Enviado para a Cozinha!';
+        document.getElementById('titulo-sucesso').innerText = (nomeCliente !== 'Cliente') ? `Pedido de ${nomeCliente} Enviado! ` : 'Pedido Enviado para a Cozinha!';
 
         if (ultimo) {
             document.getElementById('pedido-id').innerText = ultimo.id;
-            document.getElementById('pedido-mesa').innerText = `${mesaCliente} • 👤 ${nomeCliente}`;
+            document.getElementById('pedido-mesa').innerText = `${mesaCliente} •  ${nomeCliente}`;
             document.getElementById('pedido-item').innerText = `${ultimo.quantidade || 1}x ${ultimo.item}`;
             document.getElementById('pedido-specs').innerText = ultimo.detalhes || '';
             document.getElementById('pedido-obs').innerText = ultimo.observacao || 'Sem observações adicionais';
@@ -138,12 +138,12 @@
             div.innerHTML = pedidos.map((p, i) => `
                 <div class="ticket-kds">
                     <div class="ticket-topo">
-                        <span>${p.id} • 📍 ${p.mesa}</span>
-                        <span>👤 ${p.cliente || 'Cliente'}</span>
+                        <span>${p.id} •  ${p.mesa}</span>
+                        <span> ${p.cliente || 'Cliente'}</span>
                     </div>
                     <div><strong>${p.quantidade || 1}x ${p.item}</strong></div>
-                    <div style="font-size:13px; color:#52796F;">${p.detalhes || ''} • 🕒 ${p.horario || 'Agora'}</div>
-                    <div class="obs-box">📝 ${p.observacao}</div>
+                    <div style="font-size:13px; color:#52796F;">${p.detalhes || ''} •  ${p.horario || 'Agora'}</div>
+                    <div class="obs-box"> ${p.observacao}</div>
                     <button class="btn-status" onclick="avancarStatus(${i})">Status: ${p.status} ➔</button>
                 </div>
             `).join('');

@@ -15,7 +15,7 @@
         <!-- Barra de Navegação Superior -->
         <div class="nav-topo">
             <a href="inicial.html" class="btn-voltar">‹ Voltar ao Cardápio</a>
-            <span class="tag-mesa-produto" id="mesa-topo-badge">📍 Mesa 05</span>
+            <span class="tag-mesa-produto" id="mesa-topo-badge"> Mesa 05</span>
         </div>
 
         <!-- Foto Emoldurada em Alta Resolução (Nunca Estica) -->
@@ -117,7 +117,7 @@
 
         const mesaAtual = localStorage.getItem('aroma_mesa_atual') || 'Mesa 05';
         const nomeAtual = localStorage.getItem('aroma_cliente_nome') || 'Cliente';
-        document.getElementById('mesa-topo-badge').innerText = `📍 ${mesaAtual} • ${nomeAtual}`;
+        document.getElementById('mesa-topo-badge').innerText = ` ${mesaAtual} • ${nomeAtual}`;
 
         // Se for comida, esconde opções de bebida
         if (!itemAtual.eBebida) {

@@ -22,23 +22,23 @@
             </div>
         </div>
 
-        <input type="text" id="campo-busca" placeholder="🔍 Buscar café ou doce...">
+        <input type="text" id="campo-busca" placeholder=" Buscar café ou doce...">
     </header>
 
     <!-- Botões de Categoria -->
     <section class="botoes">
-        <button class="todes ativo" onclick="filtrar('todos', this)">☕ Todos</button>
-        <button class="Caps" onclick="filtrar('cappuccino', this)">🥛 Cappuccinos</button>
-        <button class="america" onclick="filtrar('gelados', this)">🧊 Gelados</button>
-        <button class="espres" onclick="filtrar('espresso', this)">⚡ Espressos</button>
-        <button class="lanches" onclick="filtrar('lanches', this)">🥐 Doces & Lanches</button>
+        <button class="todes ativo" onclick="filtrar('todos', this)"> Todos</button>
+        <button class="Caps" onclick="filtrar('cappuccino', this)"> Cappuccinos</button>
+        <button class="america" onclick="filtrar('gelados', this)"> Gelados</button>
+        <button class="espres" onclick="filtrar('espresso', this)"> Espressos</button>
+        <button class="lanches" onclick="filtrar('lanches', this)"> Doces & Lanches</button>
     </section>
 
     <!-- Grade de Produtos -->
     <main class="principal">
         <!-- 1. Cappuccino Cremoso -->
         <a href="produto.html?id=cappuccino" class="card" data-cat="cappuccino" data-nome="cappuccino cremoso leite canela">
-            <span class="badge rosa">❤️ Queridinho</span>
+            <span class="badge rosa"> Queridinho</span>
             <img src="img/Frame 5.jpg?v=2" alt="Cappuccino">
             <div class="card-info">
                 <h3>Cappuccino Cremoso</h3>
@@ -49,7 +49,7 @@
 
         <!-- 2. Frappé de Caramelo -->
         <a href="produto.html?id=frappe" class="card" data-cat="gelados" data-nome="frappe caramelo gelado doce chantilly">
-            <span class="badge">🧊 Gelado</span>
+            <span class="badge"> Gelado</span>
             <img src="img/Frame 2.jpg?v=2" alt="Frappé">
             <div class="card-info">
                 <h3>Frappé de Caramelo</h3>
@@ -60,7 +60,7 @@
 
         <!-- 3. Ice Coffee Belga -->
         <a href="produto.html?id=icecoffee" class="card" data-cat="gelados" data-nome="ice coffee belga chocolate gelado">
-            <span class="badge dourado">⭐ Mais Pedido</span>
+            <span class="badge dourado"> Mais Pedido</span>
             <img src="img/Frame 9.jpg?v=2" alt="Ice Coffee">
             <div class="card-info">
                 <h3>Ice Coffee Belga</h3>
@@ -71,7 +71,7 @@
 
         <!-- 4. Espresso Tradicional -->
         <a href="produto.html?id=espresso" class="card" data-cat="espresso" data-nome="espresso tradicional forte puro arabica">
-            <span class="badge">⚡ 100% Arábica</span>
+            <span class="badge"> 100% Arábica</span>
             <img src="img/Frame 4.jpg?v=2" alt="Espresso Tradicional">
             <div class="card-info">
                 <h3>Espresso Tradicional</h3>
@@ -82,7 +82,7 @@
 
         <!-- 5. Croissant Francês -->
         <a href="produto.html?id=croissant" class="card" data-cat="lanches" data-nome="croissant frances amanteigado quentinho lanche">
-            <span class="badge dourado">🥐 Fornada</span>
+            <span class="badge dourado"> Fornada</span>
             <img src="img/croissant.jpg" alt="Croissant">
             <div class="card-info">
                 <h3>Croissant Francês</h3>
@@ -93,7 +93,7 @@
 
         <!-- 6. Cookie Triplo Chocolate -->
         <a href="produto.html?id=cookie" class="card" data-cat="lanches" data-nome="cookie chocolate doce gotas sobremesa">
-            <span class="badge rosa">🍪 Feito Hoje</span>
+            <span class="badge rosa"> Feito Hoje</span>
             <img src="img/cookie.jpg" alt="Cookie">
             <div class="card-info">
                 <h3>Cookie Triplo Chocolate</h3>
@@ -104,7 +104,7 @@
 
         <!-- 7. Cheesecake de Frutas -->
         <a href="produto.html?id=cheesecake" class="card" data-cat="lanches" data-nome="cheesecake frutas vermelhas fatia bolo doce">
-            <span class="badge rosa">🍓 Caseiro</span>
+            <span class="badge rosa"> Caseiro</span>
             <img src="img/cheesecake.jpg" alt="Cheesecake">
             <div class="card-info">
                 <h3>Cheesecake de Frutas</h3>
@@ -115,7 +115,7 @@
 
         <!-- 8. Bolo de Cenoura com Ganache -->
         <a href="produto.html?id=bolo" class="card" data-cat="lanches" data-nome="bolo cenoura chocolate ganache artesanal fatia">
-            <span class="badge">🍰 Fofinho</span>
+            <span class="badge"> Fofinho</span>
             <img src="img/bolo.jpg" alt="Bolo">
             <div class="card-info">
                 <h3>Bolo Artesanal de Cenoura</h3>
@@ -128,7 +128,7 @@
     <!-- Barra Inferior do Tablet -->
     <button class="embaixo" onclick="window.location.href='pagar.html'">
         <div class="embaixo-conteudo">
-            <span>📍 <strong id="dock-mesa">Mesa 05</strong> • Pedido Direto para a Cozinha</span>
+            <span> <strong id="dock-mesa">Mesa 05</strong> • Pedido Direto para a Cozinha</span>
             <span class="btn-ver-cozinha">Ver Comanda / Cozinha ➔</span>
         </div>
     </button>
@@ -137,7 +137,7 @@
         // Sincroniza dados da mesa e cliente
         const nomeAtual = localStorage.getItem('aroma_cliente_nome') || 'Cliente';
         const mesaAtual = localStorage.getItem('aroma_mesa_atual') || 'Mesa 05';
-        document.getElementById('nome-topo').innerText = `Olá, ${nomeAtual}! ✨`;
+        document.getElementById('nome-topo').innerText = `Olá, ${nomeAtual}! `;
         document.getElementById('mesa-topo').innerText = mesaAtual;
         document.getElementById('dock-mesa').innerText = `${mesaAtual} (${nomeAtual})`;
 
