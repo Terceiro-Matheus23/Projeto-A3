@@ -3,11 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compra</title>
+    <title>Aroma de Casa • Pedido Enviado</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: "Itim", cursive; box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #FAF7F2; color: #1B4332; min-height: 100vh; padding: 24px 16px 80px; display: flex; flex-direction: column; align-items: center; }
+        header { text-align: center; margin-bottom: 20px; }
+        .logo { width: 64px; height: auto; margin-bottom: 6px; }
+        h1 { font-size: 30px; color: #1B4332; }
+
+        .card-confirmacao { background: #FFFFFF; max-width: 520px; width: 100%; border-radius: 24px; padding: 28px 20px; text-align: center; box-shadow: 0 8px 24px rgba(27,67,50,0.08); border: 2px solid #D8F3DC; }
+        .check-circulo { width: 64px; height: 64px; background: #D8F3DC; color: #1B4332; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; margin: 0 auto 12px; }
+        h2 { font-size: 24px; color: #1B4332; margin-bottom: 4px; }
+        .tag-sem-pagamento { background: #E8F5E9; color: #2D6A4F; padding: 4px 14px; border-radius: 14px; font-size: 13.5px; font-weight: bold; display: inline-block; margin-bottom: 18px; }
+
+        .detalhes-comanda { background: #FAFBF9; border: 1.5px solid #ECECEC; border-radius: 16px; padding: 16px; text-align: left; margin-bottom: 20px; }
+        .linha { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 15px; }
+        .linha:last-child { margin-bottom: 0; border-top: 1px dashed #D8F3DC; padding-top: 8px; font-size: 18px; font-weight: bold; }
+        .obs-box { background: #FFF3CD; color: #856404; padding: 6px 10px; border-radius: 8px; font-size: 13px; margin: 8px 0; }
+
+        /* Tracker */
+        .tracker { display: flex; justify-content: space-between; margin: 18px 0 24px; position: relative; }
+        .passo { display: flex; flex-direction: column; align-items: center; font-size: 12px; color: #52796F; }
+        .passo-num { width: 32px; height: 32px; border-radius: 50%; background: #EAEAEA; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 4px; }
+        .passo.ativo .passo-num { background: #1B4332; color: #FFFFFF; }
+        .passo.concluido .passo-num { background: #40916C; color: #FFFFFF; }
+
+        .botoes-acao { display: flex; gap: 10px; justify-content: center; }
+        .btn { padding: 12px 20px; border-radius: 20px; font-size: 16px; font-weight: bold; text-decoration: none; border: none; cursor: pointer; }
+        .btn-primario { background: #1B4332; color: #FFFFFF; }
+        .btn-primario:hover { background: #2D6A4F; }
+        .btn-secundario { background: #D8F3DC; color: #1B4332; }
+
+        /* Painel Cozinha (KDS) */
+        .painel-cozinha { max-width: 700px; width: 100%; margin-top: 24px; background: #FFFFFF; border-radius: 24px; padding: 20px; border: 2px solid #52796F; }
+        .ticket-kds { background: #FAFBF9; border: 1.5px solid #D8F3DC; border-radius: 16px; padding: 14px; margin-top: 12px; }
+        .ticket-topo { display: flex; justify-content: space-between; font-weight: bold; border-bottom: 1px dashed #D8F3DC; padding-bottom: 6px; margin-bottom: 8px; }
+        .btn-status { width: 100%; padding: 10px; background: #D8F3DC; color: #1B4332; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn-status:hover { background: #1B4332; color: #FFFFFF; }
+    </style>
 </head>
 <body>
-    
 
-    <header> </header>
+    <header>
+        <img src="img/Group 1@2x.jpg" alt="Logo" class="logo">
+        <h1>Aroma de Casa</h1>
+    </header>
+
+    <!-- Visão do Cliente -->
+    <div class="card-confirmacao">
+        <div class="check-circulo">✓</div>
+        <h2 id="titulo-sucesso">Pedido Enviado!</h2>
+        <span class="tag-sem-pagamento">💚 Autoatendimento na Mesa (Sem Cobrança no Tablet)</span>
+
+        <div class="detalhes-comanda">
+            <div class="linha"><span>Comanda:</span><strong id="pedido-id">#AC-7821</strong></div>
+            <div class="linha"><span>Mesa & Cliente:</span><strong id="pedido-mesa">Mesa 05 • Beatriz</strong></div>
+            <div class="linha"><span>Item:</span><strong id="pedido-item">1x Cappuccino Cremoso</strong></div>
+            <div class="linha" style="font-size: 13.5px; color: #52796F;"><span id="pedido-specs">P (200ml) • Leite Integral</span></div>
+            <div class="obs-box" id="box-obs">📝 <span id="pedido-obs">Caprichar na canela</span></div>
+            <div class="linha"><span>Total:</span><span id="pedido-total" style="color: #1B4332;">R$ 14,00</span></div>
+        </div>
+
+        <div class="tracker">
+            <div class="passo concluido"><div class="passo-num">1</div><span>Recebido</span></div>
+            <div class="passo ativo"><div class="passo-num">2</div><span>No Barista</span></div>
+            <div class="passo"><div class="passo-num">3</div><span>Pronto</span></div>
+            <div class="passo"><div class="passo-num">4</div><span>Entregue</span></div>
+        </div>
+
+        <div class="botoes-acao">
+            <a href="inicial.html" class="btn btn-primario">+ Fazer Outro Pedido</a>
+            <button type="button" class="btn btn-secundario" onclick="alternarCozinha()">Painel da Cozinha 🍳</button>
+        </div>
+    </div>
+
+    <!-- Painel KDS (Cozinha) -->
+    <section class="painel-cozinha" id="secao-cozinha" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3>🍳 Painel de Pedidos do Barista (KDS)</h3>
+            <button type="button" onclick="tocarSino()" style="padding: 4px 10px; border-radius: 10px; border: 1px solid #D8F3DC; background: #FFF; cursor: pointer;">🔔 Tocar Sino</button>
+        </div>
+        <p style="font-size: 13px; color: #52796F; margin-top: 4px;">Pedidos recebidos dos tablets das mesas em tempo real.</p>
+        <div id="lista-kds"></div>
+    </section>
+
+    <script>
+        // Som do sino do barista via Web Audio API
+        function tocarSino() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator(), gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(659.25, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(987.77, ctx.currentTime + 0.12);
+                gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.start(); osc.stop(ctx.currentTime + 0.6);
+            } catch (e) {}
+        }
+
+        // Carrega dados do cliente
+        const ultimo = JSON.parse(localStorage.getItem('aroma_ultimo_pedido') || 'null');
+        const nomeCliente = (ultimo && ultimo.cliente) || localStorage.getItem('aroma_cliente_nome') || 'Cliente';
+        const mesaCliente = (ultimo && ultimo.mesa) || localStorage.getItem('aroma_mesa_atual') || 'Mesa 05';
+
+        document.getElementById('titulo-sucesso').innerText = (nomeCliente !== 'Cliente') ? `Pedido de ${nomeCliente} Enviado! ✨` : 'Pedido Enviado para a Cozinha!';
+
+        if (ultimo) {
+            document.getElementById('pedido-id').innerText = ultimo.id;
+            document.getElementById('pedido-mesa').innerText = `${mesaCliente} • 👤 ${nomeCliente}`;
+            document.getElementById('pedido-item').innerText = `${ultimo.quantidade || 1}x ${ultimo.item}`;
+            document.getElementById('pedido-specs').innerText = ultimo.detalhes || '';
+            document.getElementById('pedido-obs').innerText = ultimo.observacao || 'Sem observações adicionais';
+            document.getElementById('pedido-total').innerText = ultimo.total;
+        }
+
+        function alternarCozinha() {
+            const sec = document.getElementById('secao-cozinha');
+            sec.style.display = (sec.style.display === 'none') ? 'block' : 'none';
+            if (sec.style.display === 'block') { renderizarKDS(); sec.scrollIntoView({ behavior: 'smooth' }); }
+        }
+
+        function renderizarKDS() {
+            const div = document.getElementById('lista-kds');
+            const pedidos = JSON.parse(localStorage.getItem('aroma_pedidos_cozinha') || '[]');
+            if (pedidos.length === 0) {
+                div.innerHTML = '<p style="text-align:center; padding: 20px; color:#52796F;">Nenhum pedido na fila no momento.</p>';
+                return;
+            }
+            div.innerHTML = pedidos.map((p, i) => `
+                <div class="ticket-kds">
+                    <div class="ticket-topo">
+                        <span>${p.id} • 📍 ${p.mesa}</span>
+                        <span>👤 ${p.cliente || 'Cliente'}</span>
+                    </div>
+                    <div><strong>${p.quantidade || 1}x ${p.item}</strong></div>
+                    <div style="font-size:13px; color:#52796F;">${p.detalhes || ''} • 🕒 ${p.horario || 'Agora'}</div>
+                    <div class="obs-box">📝 ${p.observacao}</div>
+                    <button class="btn-status" onclick="avancarStatus(${i})">Status: ${p.status} ➔</button>
+                </div>
+            `).join('');
+        }
+
+        function avancarStatus(i) {
+            let pedidos = JSON.parse(localStorage.getItem('aroma_pedidos_cozinha') || '[]');
+            const etapas = ['Em Preparo', 'Pronto para Servir', 'Entregue'];
+            const idx = etapas.indexOf(pedidos[i].status) + 1;
+            tocarSino();
+            if (idx < etapas.length) pedidos[i].status = etapas[idx];
+            else pedidos.splice(i, 1);
+            localStorage.setItem('aroma_pedidos_cozinha', JSON.stringify(pedidos));
+            renderizarKDS();
+        }
+    </script>
 </body>
 </html>
