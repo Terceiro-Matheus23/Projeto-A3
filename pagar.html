@@ -100,7 +100,8 @@
     </section>
 
     <script>
-        // Som do sino do barista
+       
+// Som do sino do barista
 function tocarSino() {
     try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -126,7 +127,7 @@ function tocarSino() {
 
 
 // Carrega dados do cliente
-const ultimo = JSON.parse(
+let ultimo = JSON.parse(
     localStorage.getItem('aroma_ultimo_pedido') || 'null'
 );
 
@@ -165,7 +166,7 @@ if (ultimo) {
 }
 
 
-// Atualiza as cores dos indicadores
+// Atualiza as cores dos indicadores da tela do cliente
 function atualizarStatusVisual() {
 
     const pedidos = JSON.parse(
@@ -180,24 +181,26 @@ function atualizarStatusVisual() {
         ? pedidoAtual.status
         : (ultimo && ultimo.status) || 'Recebido';
 
-    const statusNormalizado = status
+    const statusNormalizado = String(status)
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
         .toLowerCase();
 
     let etapaAtual = 0;
 
-    if (statusNormalizado === 'em preparo' ||
-        statusNormalizado === 'no barista') {
+    if (
+        statusNormalizado === 'em preparo' ||
+        statusNormalizado === 'no barista'
+    ) {
         etapaAtual = 1;
-    }
 
-    else if (statusNormalizado === 'pronto para servir' ||
-             statusNormalizado === 'pronto') {
+    } else if (
+        statusNormalizado === 'pronto para servir' ||
+        statusNormalizado === 'pronto'
+    ) {
         etapaAtual = 2;
-    }
 
-    else if (statusNormalizado === 'entregue') {
+    } else if (statusNormalizado === 'entregue') {
         etapaAtual = 3;
     }
 
@@ -207,18 +210,13 @@ function atualizarStatusVisual() {
 
         passo.classList.remove('ativo', 'concluido');
 
-        if (index < etapaAtual) {
+        // Quando chega a Entregue, todos os indicadores ficam verdes.
+        if (etapaAtual === 3 || index < etapaAtual) {
             passo.classList.add('concluido');
-        }
 
-        else if (index === etapaAtual) {
-            if (etapaAtual === 3) {
-                passo.classList.add('concluido');
-            } else {
-                passo.classList.add('ativo');
-            }
+        } else if (index === etapaAtual) {
+            passo.classList.add('ativo');
         }
-
     });
 }
 
@@ -247,7 +245,18 @@ function renderizarKDS() {
         localStorage.getItem('aroma_pedidos_cozinha') || '[]'
     );
 
-    if (pedidos.length === 0) {
+    // Mantém o índice original e esconde pedidos já entregues.
+    const pedidosNaFila = pedidos
+        .map((pedido, indiceOriginal) => ({
+            pedido,
+            indiceOriginal
+        }))
+        .filter(({ pedido }) =>
+            String(pedido.status || 'Recebido').toLowerCase() !== 'entregue'
+        );
+
+    if (pedidosNaFila.length === 0) {
+
         div.innerHTML = `
             <p style="text-align:center; padding:20px; color:#52796F;">
                 Nenhum pedido na fila no momento.
@@ -258,7 +267,7 @@ function renderizarKDS() {
         return;
     }
 
-    div.innerHTML = pedidos.map((p, i) => `
+    div.innerHTML = pedidosNaFila.map(({ pedido: p, indiceOriginal }) => `
         <div class="ticket-kds">
 
             <div class="ticket-topo">
@@ -279,7 +288,7 @@ function renderizarKDS() {
             </div>
 
             <button class="btn-status"
-                onclick="avancarStatus(${i})">
+                onclick="avancarStatus(${indiceOriginal})">
                 Status: ${p.status || 'Recebido'} ➔
             </button>
 
@@ -293,53 +302,74 @@ function renderizarKDS() {
 // Avança o status do pedido
 function avancarStatus(i) {
 
-    let pedidos = JSON.parse(
+    const pedidos = JSON.parse(
         localStorage.getItem('aroma_pedidos_cozinha') || '[]'
     );
 
-    if (!pedidos[i]) return;
+    const pedido = pedidos[i];
 
-    const etapas = [
-        'Em Preparo',
-        'Pronto para Servir',
-        'Entregue'
-    ];
+    if (!pedido) return;
 
-    const statusAtual = pedidos[i].status || 'Recebido';
+    const statusAtual = String(pedido.status || 'Recebido')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase();
 
-    const idx = etapas.indexOf(statusAtual);
+    if (statusAtual === 'entregue') return;
 
     tocarSino();
 
-    if (idx === -1) {
-        pedidos[i].status = etapas[0];
+    if (statusAtual === 'recebido') {
+        pedido.status = 'Em Preparo';
+
+    } else if (
+        statusAtual === 'em preparo' ||
+        statusAtual === 'no barista'
+    ) {
+        pedido.status = 'Pronto para Servir';
+
+    } else if (
+        statusAtual === 'pronto para servir' ||
+        statusAtual === 'pronto'
+    ) {
+        pedido.status = 'Entregue';
+
+    } else {
+        pedido.status = 'Em Preparo';
     }
 
-    else if (idx < etapas.length - 1) {
-        pedidos[i].status = etapas[idx + 1];
-    }
-
-    else {
-        pedidos.splice(i, 1);
-    }
-
+    // Salva o novo status sem apagar o pedido entregue.
     localStorage.setItem(
         'aroma_pedidos_cozinha',
         JSON.stringify(pedidos)
     );
 
+    // Atualiza também os dados do último pedido.
+    if (ultimo && String(ultimo.id) === String(pedido.id)) {
+
+        ultimo.status = pedido.status;
+
+        localStorage.setItem(
+            'aroma_ultimo_pedido',
+            JSON.stringify(ultimo)
+        );
+    }
+
     renderizarKDS();
+    atualizarStatusVisual();
 }
 
 
 // Atualiza quando outra aba altera os pedidos
 window.addEventListener('storage', function(event) {
 
-    if (event.key === 'aroma_pedidos_cozinha') {
+    if (
+        event.key === 'aroma_pedidos_cozinha' ||
+        event.key === 'aroma_ultimo_pedido'
+    ) {
         renderizarKDS();
         atualizarStatusVisual();
     }
-
 });
 
 
@@ -349,6 +379,7 @@ setInterval(atualizarStatusVisual, 1500);
 
 // Inicializa os indicadores
 atualizarStatusVisual();
+
   </script>
 </body>
 </html>
