@@ -29,8 +29,8 @@
             </div>
         </div>
 
-        <button class="btn-iniciar" onclick="iniciar()">
-            <a href="inicial.html">Ver Cardápio ➔</a>
+        <button type="button" class="btn-iniciar" onclick="iniciar()">
+            Ver Cardápio ➔
         </button>
     </main>
 
@@ -42,9 +42,13 @@
         }
 
         function iniciar() {
-            const nome = document.getElementById('input-nome').value.trim() || 'Cliente';
+            const nomeInput = document.getElementById('input-nome').value.trim();
+            const nome = nomeInput || 'Cliente';
             localStorage.setItem('aroma_cliente_nome', nome);
-            if (!localStorage.getItem('aroma_mesa_atual')) localStorage.setItem('aroma_mesa_atual', 'Mesa 05');
+            if (!localStorage.getItem('aroma_mesa_atual')) {
+                localStorage.setItem('aroma_mesa_atual', 'Mesa 05');
+            }
+            window.location.href = "inicial.html";
         }
 
         // Recupera nome se já digitou

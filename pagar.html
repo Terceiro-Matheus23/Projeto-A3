@@ -25,11 +25,15 @@
         .obs-box { background: #FFF3CD; color: #856404; padding: 6px 10px; border-radius: 8px; font-size: 13px; margin: 8px 0; }
 
         /* Tracker */
-        .tracker { display: flex; justify-content: space-between; margin: 18px 0 24px; position: relative; }
-        .passo { display: flex; flex-direction: column; align-items: center; font-size: 12px; color: #52796F; }
-        .passo-num { width: 32px; height: 32px; border-radius: 50%; background: #EAEAEA; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 4px; }
-        .passo.ativo .passo-num { background: #1B4332; color: #FFFFFF; }
+        .tracker { display: flex; justify-content: space-between; margin: 18px 0 24px; position: relative; gap: 8px; }
+        .passo { display: flex; flex-direction: column; align-items: center; font-size: 12px; color: #52796F; cursor: pointer; user-select: none; transition: transform 0.2s; }
+        .passo:hover { transform: scale(1.05); }
+        .passo-num { width: 36px; height: 36px; border-radius: 50%; background: #EAEAEA; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 4px; transition: all 0.3s ease; }
+        .passo.ativo .passo-num { background: #1B4332; color: #FFFFFF; box-shadow: 0 0 10px rgba(27,67,50,0.4); }
+        .passo.ativo span { font-weight: bold; color: #1B4332; }
         .passo.concluido .passo-num { background: #40916C; color: #FFFFFF; }
+        .passo.concluido span { color: #40916C; font-weight: 600; }
+        .dica-passo { font-size: 12px; color: #52796F; margin-bottom: 16px; font-style: italic; }
 
         .botoes-acao { display: flex; gap: 10px; justify-content: center; }
         .btn { padding: 12px 20px; border-radius: 20px; font-size: 16px; font-weight: bold; text-decoration: none; border: none; cursor: pointer; }
@@ -67,30 +71,31 @@
             <div class="linha"><span>Total:</span><span id="pedido-total" style="color: #1B4332;">R$ 14,00</span></div>
         </div>
 
-       <div class="tracker">
-    <div class="passo" data-etapa="0">
-        <div class="passo-num">1</div>
-        <span>Recebido</span>
-    </div>
+        <div class="tracker" id="tracker-passos">
+            <div class="passo ativo" data-etapa="0" onclick="mudarParaEtapa(0)" title="Clique para mudar status">
+                <div class="passo-num">1</div>
+                <span>Recebido</span>
+            </div>
 
-    <div class="passo" data-etapa="1">
-        <div class="passo-num">2</div>
-        <span>No Barista</span>
-    </div>
+            <div class="passo" data-etapa="1" onclick="mudarParaEtapa(1)" title="Clique para mudar status">
+                <div class="passo-num">2</div>
+                <span>No Barista</span>
+            </div>
 
-    <div class="passo" data-etapa="2">
-        <div class="passo-num">3</div>
-        <span>Pronto</span>
-    </div>
+            <div class="passo" data-etapa="2" onclick="mudarParaEtapa(2)" title="Clique para mudar status">
+                <div class="passo-num">3</div>
+                <span>Pronto</span>
+            </div>
 
-    <div class="passo" data-etapa="3">
-        <div class="passo-num">4</div>
-        <span>Entregue</span>
-    </div>
-</div>
+            <div class="passo" data-etapa="3" onclick="mudarParaEtapa(3)" title="Clique para mudar status">
+                <div class="passo-num">4</div>
+                <span>Entregue</span>
+            </div>
+        </div>
+        <p class="dica-passo">💡 Dica: Clique nos números acima ou use os botões da Cozinha para avançar as etapas em tempo real!</p>
         
-!-- Botões da tela final -->
-<div class="botoes-acao">
+        <!-- Botões da tela final -->
+        <div class="botoes-acao">
     <a href="coffee.html" class="btn btn-primario">
         + Fazer Outro Pedido
     </a>
@@ -234,6 +239,34 @@ function atualizarStatusVisual() {
     });
 }
 
+
+// Função para mudar a etapa ao clicar diretamente no passo
+const listaNomesStatus = ['Recebido', 'No Barista', 'Pronto', 'Entregue'];
+
+function mudarParaEtapa(indiceEtapa) {
+    tocarSino();
+    const novoStatus = listaNomesStatus[indiceEtapa] || 'Recebido';
+
+    const pedidos = JSON.parse(
+        localStorage.getItem('aroma_pedidos_cozinha') || '[]'
+    );
+
+    if (ultimo) {
+        ultimo.status = novoStatus;
+        localStorage.setItem('aroma_ultimo_pedido', JSON.stringify(ultimo));
+
+        const index = pedidos.findIndex(p => String(p.id) === String(ultimo.id));
+        if (index !== -1) {
+            pedidos[index].status = novoStatus;
+            localStorage.setItem('aroma_pedidos_cozinha', JSON.stringify(pedidos));
+        }
+    }
+
+    atualizarStatusVisual();
+    if (document.getElementById('secao-cozinha').style.display === 'block') {
+        renderizarKDS();
+    }
+}
 
 // Abre e fecha o painel da cozinha
 function alternarCozinha() {
