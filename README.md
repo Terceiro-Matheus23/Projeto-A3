@@ -7,7 +7,10 @@ Abra um novo terminal e nele digite
 git pull origin main
 
 # 2. Inicie o site
-python3 -m http.server 8000
+python -m http.server 8000
+
+# 3. Abra o navegador (Chrome, Edge, etc.) e digite este endereço na barra superior:
+http://localhost:8000/coffee.html
 
 # 1. Para adicionar todas as alterações feitas
 git add .
