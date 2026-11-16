@@ -149,19 +149,3 @@ a {
         font-size: 14px;
     }
 }
-
-body {
-    background-color: #FAF7F2;
-    background-repeat: repeat;
-    background-size: 550px;
-    background-position: center;
-    min-height: 100vh;
-    min-height: 100dvh;
-}
-
-/* Ajuste para celulares */
-@media (max-width: 480px) {
-    body {
-        background-size: 350px;
-    }
-}
