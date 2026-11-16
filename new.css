@@ -1,0 +1,41 @@
+*{
+    font-family: Itim;
+}
+
+
+main{
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+margin-top: 95px;
+
+}
+
+.imagem1{
+    width: 250px;
+   margin-top: 26px;
+}
+
+p{
+color: #1B4332;
+font-size: 60px;
+margin-top: 55px;
+}
+
+button{
+background: #1B4332;
+border: none;
+border-radius: 20px;
+width: 180px;
+height: 50px;
+cursor: pointer;
+font-size: 25px;
+color: white;
+margin-top: 83px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
