@@ -1,57 +1,64 @@
-*{
-    font-family: "Itim", cursive;
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Itim", cursive;
 }
 
-body{
+body {
     background: #FAF7F2;
     min-height: 100vh;
 }
 
-main{
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-min-height: 100vh;
-padding: 30px 20px;
-text-align: center;
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 30px 20px;
+    text-align: center;
 }
 
-.logotipo{
+.logotipo {
     width: 300px;
     max-width: 80%;
     height: auto;
-    display: block;
+    object-fit: contain;
     margin-top: 26px;
 }
 
-p{
-color: #1B4332;
-font-size: 60px;
- margin-top: 55px;
+p {
+    color: #1B4332;
+    font-size: 60px;
+    margin-top: 55px;
+    line-height: 1.2;
 }
 
-button{
-background: #1B4332;
-border: none;
-border-radius: 20px;
-width: 180px;
-height: 50px;
-cursor: pointer;
-font-size: 20px;
-color: white;
-margin-top: 75px;
-transition: background 0.3s ease;
+button {
+    background: #1B4332;
+    border: none;
+    border-radius: 20px;
+    width: 180px;
+    min-height: 50px;
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+    margin-top: 83px;
+    transition: background 0.3s ease;
 }
 
 button:hover {
     background: #2D6A4F;
 }
 
-a{
+a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 50px;
     text-decoration: none;
     color: white;
 }
@@ -59,37 +66,55 @@ a{
 @media (max-width: 768px) {
     .logotipo {
         width: 240px;
+        margin-top: 15px;
     }
 
     p {
         font-size: 45px;
-        margin-bottom: 35px;
+        margin-top: 35px;
     }
 
     button {
-        width: 180px;
-        min-height: 50px;
+        width: 200px;
+        margin-top: 60px;
     }
 }
 
-    @media (max-width: 480px) {
+@media (max-width: 480px) {
     main {
-        padding: 20px 16px;
+        padding: 24px 16px;
     }
 
     .logotipo {
         width: 180px;
-        margin-bottom: 20px;
+        max-width: 75%;
+        margin-top: 0;
     }
 
     p {
         font-size: 36px;
-        margin-bottom: 30px;
+        margin-top: 25px;
     }
 
     button {
-        width: 180px;
-        min-height: 55px;
+        width: 100%;
+        max-width: 240px;
+        min-height: 52px;
         font-size: 20px;
+        margin-top: 45px;
+    }
+}
+
+@media (max-width: 360px) {
+    .logotipo {
+        width: 150px;
+    }
+
+    p {
+        font-size: 30px;
+    }
+
+    button {
+        max-width: 210px;
     }
 }
