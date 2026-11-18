@@ -21,18 +21,17 @@ text-align: center;
 }
 
 .logotipo{
-     width: 300px;
-    max-width: 100%;
-    height: 300px;
+    width: 300px;
+    max-width: 80%;
+    height: auto;
     display: block;
-    margin-bottom: 30px
-}
+    margin-top: 26px;
 }
 
 p{
 color: #1B4332;
 font-size: 60px;
-margin-top: 55px;
+ margin-top: 55px;
 }
 
 button{
@@ -44,8 +43,8 @@ height: 50px;
 cursor: pointer;
 font-size: 20px;
 color: white;
-margin-top: 83px;
- transition: background 0.3s ease;
+margin-top: 75px;
+transition: background 0.3s ease;
 }
 
 button:hover {
@@ -94,6 +93,3 @@ a{
         font-size: 20px;
     }
 }
-
-
-
