@@ -2,6 +2,9 @@
     font-family: "Itim", cursive;
 }
 
+body{
+    background: #FAF7F2;
+}
 
 main{
 display: flex;
