@@ -150,21 +150,29 @@
         }
 
         // Filtro por categoria
-        function filtrar(categoria, btn) {
-            document.querySelectorAll('.botoes button').forEach(b => b.classList.remove('ativo'));
-            btn.classList.add('ativo');
-            document.querySelectorAll('.card').forEach(c => {
-                c.style.display = (categoria === 'todos' || c.getAttribute('data-cat') === categoria) ? 'flex' : 'none';
-            });
-        }
+function filtrar(categoria, btn) {
+    document.querySelectorAll('.botoes button').forEach(b => {
+        b.classList.remove('ativo');
+    });
 
-        // Busca em tempo real
-        document.getElementById('campo-busca').addEventListener('input', (e) => {
-            const termo = e.target.value.toLowerCase().trim();
-            document.querySelectorAll('.card').forEach(c => {
-                c.style.display = c.getAttribute('data-nome').includes(termo) ? 'flex' : 'none';
-            });
-        });
-    </script>
-</body>
-</html>
+    btn.classList.add('ativo');
+
+    document.querySelectorAll('.principal .card').forEach(card => {
+        const categoriaProduto = card.dataset.cat;
+
+        if (categoria === 'todos' || categoriaProduto === categoria) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+// Busca em tempo real
+document.getElementById('campo-busca').addEventListener('input', (e) => {
+    const termo = e.target.value.toLowerCase().trim();
+
+    document.querySelectorAll('.card').forEach(c => {
+        c.style.display = c.getAttribute('data-nome').includes(termo) ? 'flex' : 'none';
+    });
+});
