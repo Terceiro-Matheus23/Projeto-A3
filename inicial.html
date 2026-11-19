@@ -1,421 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aroma de Casa • Cardápio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="casa.css">
+</head>
+<body>
 
-@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+    <header>
+        <div class="topo">
+            <a href="coffee.html" class="marca">
+                <img src="img/Logo.png" alt="Logo" class="logo">
+                <p class="texto">Aroma de Casa</p>
+            </a>
+            <div class="tag-cliente" onclick="trocarNome()" title="Clique para trocar o nome">
+                <span id="nome-topo">Olá, Beatriz!</span> • <strong id="mesa-topo">Mesa 05</strong>
+            </div>
+        </div>
 
-* {
-    font-family: "Itim", cursive;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+        <input type="text" id="campo-busca" placeholder=" Buscar café ou doce...">
+    </header>
 
-body {
-    background-color: #FAF7F2;
-    color: #1B4332;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 100px;
-}
+    <!-- Botões de Categoria -->
+    <section class="botoes">
+        <button class="todes ativo" onclick="filtrar('todos', this)"> Todos</button>
+        <button class="Caps" onclick="filtrar('cappuccino', this)"> Cappuccinos</button>
+        <button class="america" onclick="filtrar('gelados', this)"> Gelados</button>
+        <button class="espres" onclick="filtrar('espresso', this)"> Espressos</button>
+        <button class="lanches" onclick="filtrar('lanches', this)"> Doces & Lanches</button>
+    </section>
 
-/* Header */
-header {
-    background: #FFFFFF;
-    padding: 16px 20px 12px;
-    box-shadow: 0 4px 15px rgba(27, 67, 50, 0.05);
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    border-bottom: 1px solid #ECECEC;
-}
+    <!-- Grade de Produtos -->
+    <main class="principal">
+        <!-- 1. Cappuccino Cremoso -->
+        <a href="produto.html?id=cappuccino" class="card" data-cat="cappuccino" data-nome="cappuccino cremoso leite canela">
+            <span class="badge rosa"> Queridinho</span>
+            <img src="img/Frame 5.jpg?v=2" alt="Cappuccino">
+            <div class="card-info">
+                <h3>Cappuccino Cremoso</h3>
+                <p class="desc">Espresso nobre, leite vaporizado cremoso e canela polvilhada.</p>
+                <div class="preco-linha"><span>R$ 14,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
 
-.topo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 960px;
-    margin: 0 auto 10px;
-}
+        <!-- 2. Frappé de Caramelo -->
+        <a href="produto.html?id=frappe" class="card" data-cat="gelados" data-nome="frappe caramelo gelado doce chantilly">
+            <span class="badge"> Gelado</span>
+            <img src="img/Frame 2.jpg?v=2" alt="Frappé">
+            <div class="card-info">
+                <h3>Frappé de Caramelo</h3>
+                <p class="desc">Café gelado batido, calda artesanal de caramelo e chantilly.</p>
+                <div class="preco-linha"><span>R$ 18,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
 
-.marca {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-}
+        <!-- 3. Ice Coffee Belga -->
+        <a href="produto.html?id=icecoffee" class="card" data-cat="gelados" data-nome="ice coffee belga chocolate gelado">
+            <span class="badge dourado"> Mais Pedido</span>
+            <img src="img/Frame 9.jpg?v=2" alt="Ice Coffee">
+            <div class="card-info">
+                <h3>Ice Coffee Belga</h3>
+                <p class="desc">Cold Brew especial com puro chocolate belga e cubos de gelo.</p>
+                <div class="preco-linha"><span>R$ 16,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
 
-.logo {
-    width: 38px;
-    height: auto;
-}
+        <!-- 4. Espresso Tradicional -->
+        <a href="produto.html?id=espresso" class="card" data-cat="espresso" data-nome="espresso tradicional forte puro arabica">
+            <span class="badge"> 100% Arábica</span>
+            <img src="img/Frame 4.jpg?v=2" alt="Espresso Tradicional">
+            <div class="card-info">
+                <h3>Espresso Tradicional</h3>
+                <p class="desc">Grãos nobres moídos na hora, corpo denso e crema dourada.</p>
+                <div class="preco-linha"><span>R$ 8,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
 
-.texto {
-    font-size: 26px;
-    color: #1B4332;
-    font-weight: bold;
-}
+        <!-- 5. Croissant Francês -->
+        <a href="produto.html?id=croissant" class="card" data-cat="lanches" data-nome="croissant frances amanteigado quentinho lanche">
+            <span class="badge dourado"> Fornada</span>
+            <img src="img/croissant.jpg" alt="Croissant">
+            <div class="card-info">
+                <h3>Croissant Francês</h3>
+                <p class="desc">Folhado artesanal amanteigado, crocante por fora e macio por dentro.</p>
+                <div class="preco-linha"><span>R$ 15,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
 
-.tag-cliente {
-    background: #F4F8F5;
-    border: 1.5px solid #D8F3DC;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 14px;
-    cursor: pointer;
-    color: #1B4332;
-}
+        <!-- 6. Cookie Triplo Chocolate -->
+        <a href="produto.html?id=cookie" class="card" data-cat="lanches" data-nome="cookie chocolate doce gotas sobremesa">
+            <span class="badge rosa"> Feito Hoje</span>
+            <img src="img/cookie.jpg" alt="Cookie">
+            <div class="card-info">
+                <h3>Cookie Triplo Chocolate</h3>
+                <p class="desc">Massa macia com generosas gotas de chocolate meio amargo e ao leite.</p>
+                <div class="preco-linha"><span>R$ 12,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
 
-.tag-cliente:hover {
-    background: #D8F3DC;
-}
+        <!-- 7. Cheesecake de Frutas -->
+        <a href="produto.html?id=cheesecake" class="card" data-cat="lanches" data-nome="cheesecake frutas vermelhas fatia bolo doce">
+            <span class="badge rosa"> Caseiro</span>
+            <img src="img/cheesecake.jpg" alt="Cheesecake">
+            <div class="card-info">
+                <h3>Cheesecake de Frutas</h3>
+                <p class="desc">Creme suave com calda artesanal de amora, framboesa e morango.</p>
+                <div class="preco-linha"><span>R$ 19,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
 
-input {
-    width: 100%;
-    max-width: 960px;
-    display: block;
-    margin: 0 auto;
-    padding: 10px 16px;
-    border: 1.5px solid #D8F3DC;
-    border-radius: 20px;
-    font-size: 15px;
-    outline: none;
-    background: #F9FAF9;
-}
+        <!-- 8. Bolo de Cenoura com Ganache -->
+        <a href="produto.html?id=bolo" class="card" data-cat="lanches" data-nome="bolo cenoura chocolate ganache artesanal fatia">
+            <span class="badge"> Fofinho</span>
+            <img src="img/bolo.jpg" alt="Bolo">
+            <div class="card-info">
+                <h3>Bolo Artesanal de Cenoura</h3>
+                <p class="desc">Massa fofinha com cobertura cremosa de ganache de brigadeiro.</p>
+                <div class="preco-linha"><span>R$ 14,00</span><span class="btn-pedir">+ Pedir</span></div>
+            </div>
+        </a>
+    </main>
 
-input:focus {
-    border-color: #1B4332;
-    background: #FFFFFF;
-}
+    <!-- Barra Inferior do Tablet -->
+    <button class="embaixo" onclick="window.location.href='pagar.html'">
+        <div class="embaixo-conteudo">
+            <span> <strong id="dock-mesa">Mesa 05</strong> • Pedido Direto para a Cozinha</span>
+            <span class="btn-ver-cozinha">Ver Comanda / Cozinha ➔</span>
+        </div>
+    </button>
 
-/* Categorias */
-.botoes {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin: 16px auto;
-    padding: 0 16px;
-    max-width: 960px;
-    overflow-x: auto;
-}
+    <script>
+        // Sincroniza dados da mesa e cliente
+        const nomeAtual = localStorage.getItem('aroma_cliente_nome') || 'Cliente';
+        const mesaAtual = localStorage.getItem('aroma_mesa_atual') || 'Mesa 05';
+        document.getElementById('nome-topo').innerText = Olá, ${nomeAtual}! ;
+        document.getElementById('mesa-topo').innerText = mesaAtual;
+        document.getElementById('dock-mesa').innerText = ${mesaAtual} (${nomeAtual});
 
-button {
-    background: #D8F3DC;
-    color: #1B4332;
-    border: none;
-    border-radius: 16px;
-    padding: 8px 16px;
-    min-height: 38px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 500;
-    white-space: nowrap;
-    transition: all 0.2s;
-}
+        function trocarNome() {
+            const novo = prompt('Qual é o seu nome para a comanda?', nomeAtual);
+            if (novo && novo.trim()) {
+                localStorage.setItem('aroma_cliente_nome', novo.trim());
+                location.reload();
+            }
+        }
 
-button:hover, button.ativo {
-    background: #1B4332;
-    color: #FFFFFF;
-    transform: translateY(-2px);
-}
+        // Filtro por categoria
+        function filtrar(categoria, btn) {
+            document.querySelectorAll('.botoes button').forEach(b => b.classList.remove('ativo'));
+            btn.classList.add('ativo');
+            document.querySelectorAll('.card').forEach(c => {
+                c.style.display = (categoria === 'todos' || c.getAttribute('data-cat') === categoria) ? 'flex' : 'none';
+            });
+        }
 
-/* Grid de Produtos */
-.principal {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    max-width: 960px;
-    margin: 0 auto;
-    gap: 18px;
-    padding: 10px 16px;
-    width: 100%;
-}
-
-.card {
-    background: #FFFFFF;
-    border-radius: 20px;
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    border: 1.5px solid #EAEFEA;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-    position: relative;
-    transition: all 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 22px rgba(27, 67, 50, 0.12);
-    border-color: #B7E4C7;
-}
-
-.badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.badge.rosa {
-    background: #FFF0F3;
-    color: #C94A67;
-}
-
-.badge.dourado {
-    background: #FFF9DB;
-    color: #8C6D00;
-}
-
-.card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    object-position: center;
-}
-
-.card-info {
-    padding: 14px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.card-info h3 {
-    font-size: 18px;
-    color: #1B4332;
-    margin-bottom: 4px;
-}
-
-.card-info .desc {
-    font-size: 13.5px;
-    color: #52796F;
-    margin-bottom: 12px;
-    line-height: 1.35;
-    flex-grow: 1;
-}
-
-.preco-linha {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px dashed #D8F3DC;
-    padding-top: 10px;
-}
-
-.preco-linha span:first-child {
-    font-size: 19px;
-    font-weight: bold;
-    color: #1B4332;
-}
-
-.btn-pedir {
-    background: #1B4332;
-    color: #FFFFFF;
-    padding: 6px 14px;
-    border-radius: 12px;
-    font-size: 13.5px;
-    font-weight: bold;
-}
-
-/* Barra Inferior */
-.embaixo {
-    background: #1B4332;
-    width: 100%;
-    min-height: 65px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    border-radius: 18px 18px 0 0;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
-    z-index: 100;
-    border: none;
-}
-
-.embaixo-conteudo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 960px;
-    color: #FFFFFF;
-    font-size: 16px;
-}
-
-.btn-ver-cozinha {
-    background: #D8F3DC;
-    color: #1B4332;
-    padding: 6px 14px;
-    border-radius: 12px;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-/* Responsividade Mobile */
-@media (max-width: 600px) {
-
-    html, body {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-    }
-
-    header {
-        width: 100%;
-        padding: 14px 15px 12px;
-    }
-
-    .topo {
-        width: 100%;
-        gap: 8px;
-    }
-
-    .marca {
-        min-width: 0;
-        gap: 8px;
-    }
-
-    .logo {
-        width: 34px;
-        flex-shrink: 0;
-    }
-
-    .texto {
-        font-size: 22px;
-    }
-
-    .tag-cliente {
-        font-size: 12px;
-        padding: 6px 9px;
-        flex-shrink: 0;
-    }
-
-    input {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .botoes {
-        width: 100%;
-        max-width: 100%;
-        justify-content: flex-start;
-        flex-wrap: nowrap;
-        margin: 12px 0;
-        padding: 5px 12px 10px;
-        gap: 8px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .botoes button {
-        flex-shrink: 0;
-    }
-
-    .principal {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        grid-template-columns: minmax(0, 1fr);
-        gap: 16px;
-        padding: 10px 12px 20px;
-        margin: 0;
-    }
-
-    .card {
-        width: 100%;
-        min-width: 0;
-        max-width: 100%;
-    }
-
-    .card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
-
-    .card-info {
-        width: 100%;
-        padding: 13px;
-    }
-
-    .card-info h3 {
-        font-size: 18px;
-    }
-
-    .card-info .desc {
-        font-size: 13.5px;
-        line-height: 1.4;
-    }
-
-    .preco-linha {
-        width: 100%;
-        gap: 8px;
-    }
-
-    .embaixo {
-        width: 100%;
-        min-height: 65px;
-        padding: 10px 12px;
-    }
-
-    .embaixo-conteudo {
-        width: 100%;
-        gap: 6px;
-        font-size: 12px;
-    }
-
-    .embaixo-conteudo > span:first-child {
-        min-width: 0;
-        font-size: 11px;
-        line-height: 1.3;
-    }
-
-    .btn-ver-cozinha {
-        font-size: 11px;
-        padding: 8px 10px;
-        white-space: nowrap;
-        flex-shrink: 0;
-    }
-}
-
-/* Celulares pequenos */
-@media (max-width: 380px) {
-
-    .texto {
-        font-size: 19px;
-    }
-
-    .logo {
-        width: 30px;
-    }
-
-    .tag-cliente {
-        font-size: 10px;
-        padding: 5px 7px;
-    }
-
-    .card img {
-        height: 175px;
-    }
-
-    .card-info h3 {
-        font-size: 17px;
-    }
-
-    .embaixo-conteudo > span:first-child {
-        font-size: 10px;
-    }
-
-    .btn-ver-cozinha {
-        font-size: 10px;
-        padding: 7px 8px;
-    }
-}
+        // Busca em tempo real
+        document.getElementById('campo-busca').addEventListener('input', (e) => {
+            const termo = e.target.value.toLowerCase().trim();
+            document.querySelectorAll('.card').forEach(c => {
+                c.style.display = c.getAttribute('data-nome').includes(termo) ? 'flex' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
