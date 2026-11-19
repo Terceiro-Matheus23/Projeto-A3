@@ -258,20 +258,83 @@ button:hover, button.ativo {
 }
 
 /* Responsividade Mobile */
+/* Responsividade Mobile */
 @media (max-width: 600px) {
+
+    html, body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    header {
+        width: 100%;
+        padding: 12px 14px;
+    }
+
+    .topo {
+        width: 100%;
+        gap: 8px;
+    }
+
+    .texto {
+        font-size: 22px;
+    }
+
+    .tag-cliente {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    input {
+        width: 100%;
+    }
+
     .botoes {
-        display: flex;
+        width: 100%;
+        justify-content: flex-start;
         overflow-x: auto;
         padding: 10px 12px;
         gap: 8px;
         -webkit-overflow-scrolling: touch;
     }
+
     .botoes button {
         white-space: nowrap;
         flex-shrink: 0;
     }
+
     .principal {
-        grid-template-columns: 1fr;
+        width: 100%;
+        max-width: 100%;
+        grid-template-columns: minmax(0, 1fr);
         padding: 10px 12px;
+        gap: 14px;
+    }
+
+    .card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .card img {
+        width: 100%;
+    }
+
+    .embaixo {
+        width: 100%;
+        padding: 10px 12px;
+    }
+
+    .embaixo-conteudo {
+        width: 100%;
+        gap: 8px;
+        font-size: 13px;
+    }
+
+    .btn-ver-cozinha {
+        padding: 7px 10px;
+        font-size: 12px;
+        flex-shrink: 0;
     }
 }
