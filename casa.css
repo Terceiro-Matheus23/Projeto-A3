@@ -338,3 +338,8 @@ button:hover, button.ativo {
         flex-shrink: 0;
     }
 }
+@media (max-width: 600px) {
+    * {
+        font-family: "Itim", cursive !important;
+    }
+}
