@@ -110,6 +110,7 @@ button.btn-iniciar {
     border: none;
     border-radius: 25px;
     cursor: pointer;
+     color: white;
     box-shadow: 0 6px 18px rgba(27, 67, 50, 0.25);
     transition: all 0.2s;
 }
