@@ -1,170 +1,249 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aroma de Casa • Cardápio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="casa.css">
-</head>
-<body>
 
-    <header>
-        <div class="topo">
-            <a href="coffee.html" class="marca">
-                <img src="img/Logo.png" alt="Logo" class="logo">
-                <p class="texto">Aroma de Casa</p>
-            </a>
-            <div class="tag-cliente" onclick="trocarNome()" title="Clique para trocar o nome">
-                <span id="nome-topo">Olá, Beatriz!</span> • <strong id="mesa-topo">Mesa 05</strong>
-            </div>
-        </div>
+/* ==========================================
+   RESPONSIVIDADE - AROMA DE CASA
+========================================== */
 
-        <input type="text" id="campo-busca" placeholder=" Buscar café ou doce...">
-    </header>
+/* Configuração geral */
+* {
+    box-sizing: border-box;
+}
 
-    <!-- Botões de Categoria -->
-    <section class="botoes">
-        <button class="todes ativo" onclick="filtrar('todos', this)"> Todos</button>
-        <button class="Caps" onclick="filtrar('cappuccino', this)"> Cappuccinos</button>
-        <button class="america" onclick="filtrar('gelados', this)"> Gelados</button>
-        <button class="espres" onclick="filtrar('espresso', this)"> Espressos</button>
-        <button class="lanches" onclick="filtrar('lanches', this)"> Doces & Lanches</button>
-    </section>
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
 
-    <!-- Grade de Produtos -->
-    <main class="principal">
-        <!-- 1. Cappuccino Cremoso -->
-        <a href="produto.html?id=cappuccino" class="card" data-cat="cappuccino" data-nome="cappuccino cremoso leite canela">
-            <span class="badge rosa"> Queridinho</span>
-            <img src="img/Frame 5.jpg?v=2" alt="Cappuccino">
-            <div class="card-info">
-                <h3>Cappuccino Cremoso</h3>
-                <p class="desc">Espresso nobre, leite vaporizado cremoso e canela polvilhada.</p>
-                <div class="preco-linha"><span>R$ 14,00</span><span class="btn-pedir">+ Pedir</span></div>
-            </div>
-        </a>
+/* ==========================================
+   RESPONSIVIDADE PARA CELULARES
+========================================== */
 
-        <!-- 2. Frappé de Caramelo -->
-        <a href="produto.html?id=frappe" class="card" data-cat="gelados" data-nome="frappe caramelo gelado doce chantilly">
-            <span class="badge"> Gelado</span>
-            <img src="img/Frame 2.jpg?v=2" alt="Frappé">
-            <div class="card-info">
-                <h3>Frappé de Caramelo</h3>
-                <p class="desc">Café gelado batido, calda artesanal de caramelo e chantilly.</p>
-                <div class="preco-linha"><span>R$ 18,00</span><span class="btn-pedir">+ Pedir</span></div>
-            </div>
-        </a>
+@media screen and (max-width: 600px) {
 
-        <!-- 3. Ice Coffee Belga -->
-        <a href="produto.html?id=icecoffee" class="card" data-cat="gelados" data-nome="ice coffee belga chocolate gelado">
-            <span class="badge dourado"> Mais Pedido</span>
-            <img src="img/Frame 9.jpg?v=2" alt="Ice Coffee">
-            <div class="card-info">
-                <h3>Ice Coffee Belga</h3>
-                <p class="desc">Cold Brew especial com puro chocolate belga e cubos de gelo.</p>
-                <div class="preco-linha"><span>R$ 16,00</span><span class="btn-pedir">+ Pedir</span></div>
-            </div>
-        </a>
+    /* Cabeçalho */
+    header {
+        width: 100%;
+        max-width: 100%;
+        padding: 15px;
+    }
 
-        <!-- 4. Espresso Tradicional -->
-        <a href="produto.html?id=espresso" class="card" data-cat="espresso" data-nome="espresso tradicional forte puro arabica">
-            <span class="badge"> 100% Arábica</span>
-            <img src="img/Frame 4.jpg?v=2" alt="Espresso Tradicional">
-            <div class="card-info">
-                <h3>Espresso Tradicional</h3>
-                <p class="desc">Grãos nobres moídos na hora, corpo denso e crema dourada.</p>
-                <div class="preco-linha"><span>R$ 8,00</span><span class="btn-pedir">+ Pedir</span></div>
-            </div>
-        </a>
+    .topo {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
 
-        <!-- 5. Croissant Francês -->
-        <a href="produto.html?id=croissant" class="card" data-cat="lanches" data-nome="croissant frances amanteigado quentinho lanche">
-            <span class="badge dourado"> Fornada</span>
-            <img src="img/croissant.jpg" alt="Croissant">
-            <div class="card-info">
-                <h3>Croissant Francês</h3>
-                <p class="desc">Folhado artesanal amanteigado, crocante por fora e macio por dentro.</p>
-                <div class="preco-linha"><span>R$ 15,00</span><span class="btn-pedir">+ Pedir</span></div>
-            </div>
-        </a>
+    .marca {
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
 
-        <!-- 6. Cookie Triplo Chocolate -->
-        <a href="produto.html?id=cookie" class="card" data-cat="lanches" data-nome="cookie chocolate doce gotas sobremesa">
-            <span class="badge rosa"> Feito Hoje</span>
-            <img src="img/cookie.jpg" alt="Cookie">
-            <div class="card-info">
-                <h3>Cookie Triplo Chocolate</h3>
-                <p class="desc">Massa macia com generosas gotas de chocolate meio amargo e ao leite.</p>
-                <div class="preco-linha"><span>R$ 12,00</span><span class="btn-pedir">+ Pedir</span></div>
-            </div>
-        </a>
+    .logo {
+        max-width: 45px;
+        height: auto;
+        flex-shrink: 0;
+    }
 
-        <!-- 7. Cheesecake de Frutas -->
-        <a href="produto.html?id=cheesecake" class="card" data-cat="lanches" data-nome="cheesecake frutas vermelhas fatia bolo doce">
-            <span class="badge rosa"> Caseiro</span>
-            <img src="img/cheesecake.jpg" alt="Cheesecake">
-            <div class="card-info">
-                <h3>Cheesecake de Frutas</h3>
-                <p class="desc">Creme suave com calda artesanal de amora, framboesa e morango.</p>
-                <div class="preco-linha"><span>R$ 19,00</span><span class="btn-pedir">+ Pedir</span></div>
-            </div>
-        </a>
+    .texto {
+        font-size: 22px;
+    }
 
-        <!-- 8. Bolo de Cenoura com Ganache -->
-        <a href="produto.html?id=bolo" class="card" data-cat="lanches" data-nome="bolo cenoura chocolate ganache artesanal fatia">
-            <span class="badge"> Fofinho</span>
-            <img src="img/bolo.jpg" alt="Bolo">
-            <div class="card-info">
-                <h3>Bolo Artesanal de Cenoura</h3>
-                <p class="desc">Massa fofinha com cobertura cremosa de ganache de brigadeiro.</p>
-                <div class="preco-linha"><span>R$ 14,00</span><span class="btn-pedir">+ Pedir</span></div>
-            </div>
-        </a>
-    </main>
+    .tag-cliente {
+        max-width: 155px;
+        font-size: 12px;
+        padding: 8px 10px;
+        overflow-wrap: break-word;
+    }
 
-    <!-- Barra Inferior do Tablet -->
-    <button class="embaixo" onclick="window.location.href='pagar.html'">
-        <div class="embaixo-conteudo">
-            <span> <strong id="dock-mesa">Mesa 05</strong> • Pedido Direto para a Cozinha</span>
-            <span class="btn-ver-cozinha">Ver Comanda / Cozinha ➔</span>
-        </div>
-    </button>
+    /* Campo de busca */
+    #campo-busca {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 12px;
+    }
 
-    <script>
-        // Sincroniza dados da mesa e cliente
-        const nomeAtual = localStorage.getItem('aroma_cliente_nome') || 'Cliente';
-        const mesaAtual = localStorage.getItem('aroma_mesa_atual') || 'Mesa 05';
-        document.getElementById('nome-topo').innerText = `Olá, ${nomeAtual}! `;
-        document.getElementById('mesa-topo').innerText = mesaAtual;
-        document.getElementById('dock-mesa').innerText = `${mesaAtual} (${nomeAtual})`;
+    /* Botões de categorias */
+    .botoes {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 8px;
+        padding: 12px 15px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
 
-        function trocarNome() {
-            const novo = prompt('Qual é o seu nome para a comanda?', nomeAtual);
-            if (novo && novo.trim()) {
-                localStorage.setItem('aroma_cliente_nome', novo.trim());
-                location.reload();
-            }
-        }
+    .botoes button {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
 
-        // Filtro por categoria
-        function filtrar(categoria, btn) {
-            document.querySelectorAll('.botoes button').forEach(b => b.classList.remove('ativo'));
-            btn.classList.add('ativo');
-            document.querySelectorAll('.card').forEach(c => {
-                c.style.display = (categoria === 'todos' || c.getAttribute('data-cat') === categoria) ? 'flex' : 'none';
-            });
-        }
+    .botoes::-webkit-scrollbar {
+        display: none;
+    }
 
-        // Busca em tempo real
-        document.getElementById('campo-busca').addEventListener('input', (e) => {
-            const termo = e.target.value.toLowerCase().trim();
-            document.querySelectorAll('.card').forEach(c => {
-                c.style.display = c.getAttribute('data-nome').includes(termo) ? 'flex' : 'none';
-            });
-        });
-    </script>
-</body>
-</html>
+    /* Produtos */
+    .principal {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+        padding: 15px 15px 110px;
+        margin: 0;
+    }
+
+    /* Cards */
+    .card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .card img {
+        width: 100%;
+        max-width: 100%;
+        height: 210px;
+        object-fit: cover;
+    }
+
+    /* Informações dos produtos */
+    .card-info {
+        width: 100%;
+        min-width: 0;
+        padding: 15px;
+    }
+
+    .card-info h3 {
+        font-size: 19px;
+        line-height: 1.3;
+    }
+
+    .card-info .desc {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* Preços e botão pedir */
+    .preco-linha {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .btn-pedir {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+
+    /* Barra inferior */
+    .embaixo {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        z-index: 999;
+        padding: 12px 15px;
+    }
+
+    .embaixo-conteudo {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .embaixo-conteudo > span:first-child {
+        min-width: 0;
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .btn-ver-cozinha {
+        flex-shrink: 0;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+}
+
+/* ==========================================
+   CELULARES MENORES
+========================================== */
+
+@media screen and (max-width: 380px) {
+
+    .texto {
+        font-size: 19px;
+    }
+
+    .tag-cliente {
+        max-width: 125px;
+        font-size: 10px;
+    }
+
+    .card img {
+        height: 180px;
+    }
+
+    .card-info h3 {
+        font-size: 17px;
+    }
+
+    .card-info .desc {
+        font-size: 13px;
+    }
+
+    .embaixo-conteudo > span:first-child {
+        font-size: 10px;
+    }
+
+    .btn-ver-cozinha {
+        font-size: 10px;
+    }
+}
+
+/* ==========================================
+   TABLETS
+========================================== */
+
+@media screen and (min-width: 601px) and (max-width: 900px) {
+
+    .principal {
+        width: 100%;
+        max-width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .card img {
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+    }
+}
