@@ -135,44 +135,68 @@
 
     <script>
         // Sincroniza dados da mesa e cliente
-        const nomeAtual = localStorage.getItem('aroma_cliente_nome') || 'Cliente';
-        const mesaAtual = localStorage.getItem('aroma_mesa_atual') || 'Mesa 05';
-        document.getElementById('nome-topo').innerText = Olá, ${nomeAtual}! ;
-        document.getElementById('mesa-topo').innerText = mesaAtual;
-        document.getElementById('dock-mesa').innerText = ${mesaAtual} (${nomeAtual});
+       
+// Recupera os dados do cliente e da mesa
+const nomeAtual = localStorage.getItem('aroma_cliente_nome') || 'Cliente';
+const mesaAtual = localStorage.getItem('aroma_mesa_atual') || 'Mesa 05';
 
-        function trocarNome() {
-            const novo = prompt('Qual é o seu nome para a comanda?', nomeAtual);
-            if (novo && novo.trim()) {
-                localStorage.setItem('aroma_cliente_nome', novo.trim());
-                location.reload();
-            }
-        }
+// Atualiza as informações no cabeçalho
+document.getElementById('nome-topo').innerText = `Olá, ${nomeAtual}!`;
+document.getElementById('mesa-topo').innerText = mesaAtual;
 
-        // Filtro por categoria
+// Atualiza a barra inferior
+document.getElementById('dock-mesa').innerText = mesaAtual;
+
+// Permite trocar o nome do cliente
+function trocarNome() {
+    const novo = prompt('Qual é o seu nome para a comanda?', nomeAtual);
+
+    if (novo && novo.trim()) {
+        localStorage.setItem('aroma_cliente_nome', novo.trim());
+        location.reload();
+    }
+}
+
+// Categoria atualmente selecionada
+let categoriaAtiva = 'todos';
+
+// Função para filtrar os produtos
 function filtrar(categoria, btn) {
+    categoriaAtiva = categoria;
+
     document.querySelectorAll('.botoes button').forEach(b => {
         b.classList.remove('ativo');
     });
 
     btn.classList.add('ativo');
 
-    document.querySelectorAll('.principal .card').forEach(card => {
-        const categoriaProduto = card.dataset.cat;
+    aplicarFiltros();
+}
 
-        if (categoria === 'todos' || categoriaProduto === categoria) {
-            card.style.display = '';
-        } else {
-            card.style.display = 'none';
-        }
+// Busca e filtros trabalhando juntos
+function aplicarFiltros() {
+    const campoBusca = document.getElementById('campo-busca');
+    const termo = campoBusca.value.toLowerCase().trim();
+
+    document.querySelectorAll('.principal .card').forEach(card => {
+
+        const categoriaProduto = card.dataset.cat;
+        const nomeProduto = card.dataset.nome.toLowerCase();
+
+        // Compatibilidade com a categoria dos lanches
+        const categoriaCorrigida =
+            categoriaProduto === 'lancamentos' ? 'lanches' : categoriaProduto;
+
+        const correspondeCategoria =
+            categoriaAtiva === 'todos' ||
+            categoriaCorrigida === categoriaAtiva;
+
+        const correspondeBusca = nomeProduto.includes(termo);
+
+        card.style.display =
+            correspondeCategoria && correspondeBusca ? '' : 'none';
     });
 }
 
 // Busca em tempo real
-document.getElementById('campo-busca').addEventListener('input', (e) => {
-    const termo = e.target.value.toLowerCase().trim();
-
-    document.querySelectorAll('.card').forEach(c => {
-        c.style.display = c.getAttribute('data-nome').includes(termo) ? 'flex' : 'none';
-    });
-});
+document.getElementById('campo-busca').addEventListener('input', aplicarFiltros);
