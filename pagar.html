@@ -47,9 +47,42 @@
         .ticket-topo { display: flex; justify-content: space-between; font-weight: bold; border-bottom: 1px dashed #D8F3DC; padding-bottom: 6px; margin-bottom: 8px; }
         .btn-status { width: 100%; padding: 10px; background: #D8F3DC; color: #1B4332; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; }
         .btn-status:hover { background: #1B4332; color: #FFFFFF; }
+
+        /* Navegação e Botão Voltar */
+        .nav-topo-pagar { width: 100%; max-width: 520px; display: flex; justify-content: flex-start; margin-bottom: 12px; }
+        .btn-voltar { background: #FFFFFF; border: 1.5px solid #D8F3DC; color: #1B4332; text-decoration: none; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+        .btn-voltar:hover { background: #D8F3DC; transform: translateX(-2px); }
+
+        /* Responsividade Mobile */
+        @media (max-width: 600px) {
+            body { padding: 16px 12px 60px; }
+            header { margin-bottom: 14px; }
+            h1 { font-size: 24px; }
+            .logo { width: 50px; }
+            .nav-topo-pagar { max-width: 100%; margin-bottom: 10px; }
+            .card-confirmacao { padding: 20px 14px; border-radius: 18px; }
+            h2 { font-size: 20px; }
+            .check-circulo { width: 52px; height: 52px; font-size: 28px; }
+            .detalhes-comanda { padding: 12px; }
+            .linha { font-size: 14px; }
+            .linha:last-child { font-size: 16px; }
+            .tracker { gap: 4px; margin: 14px 0 18px; }
+            .passo-num { width: 32px; height: 32px; font-size: 13px; }
+            .passo span { font-size: 11px; }
+            .dica-passo { font-size: 11px; }
+            .botoes-acao { flex-direction: column; gap: 8px; }
+            .btn { width: 100%; text-align: center; padding: 12px; font-size: 15px; }
+            .painel-cozinha { padding: 16px 12px; border-radius: 18px; margin-top: 18px; }
+            .ticket-kds { padding: 12px; }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Botão de Voltar ao Cardápio -->
+    <nav class="nav-topo-pagar">
+        <a href="inicial.html" class="btn-voltar">‹ Voltar ao Cardápio</a>
+    </nav>
 
     <header>
         <img src="img/Logo.png" alt="Logo" class="logo">
@@ -96,17 +129,18 @@
         
         <!-- Botões da tela final -->
         <div class="botoes-acao">
-    <a href="coffee.html" class="btn btn-primario">
-        + Fazer Outro Pedido
-    </a>
+            <a href="inicial.html" class="btn btn-primario">
+                + Fazer Outro Pedido
+            </a>
 
-    <button
-        type="button"
-        class="btn btn-secundario"
-        onclick="alternarCozinha()">
-        Painel da Cozinha
-    </button>
-</div>
+            <button
+                type="button"
+                class="btn btn-secundario"
+                onclick="alternarCozinha()">
+                Painel da Cozinha
+            </button>
+        </div>
+    </div> <!-- Fim card-confirmacao -->
 
     <!-- Painel KDS (Cozinha) -->
     <section class="painel-cozinha" id="secao-cozinha" style="display: none;">

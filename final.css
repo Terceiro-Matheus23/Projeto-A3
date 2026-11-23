@@ -257,3 +257,58 @@ body {
     font-size: 19px;
     font-weight: bold;
 }
+
+/* Responsividade Mobile */
+@media (max-width: 600px) {
+    .pagina-produto {
+        padding: 12px 14px;
+    }
+
+    .moldura-imagem {
+        height: 200px;
+        border-radius: 18px;
+        margin-bottom: 12px;
+    }
+
+    .primeiro-main {
+        padding: 16px 14px;
+        border-radius: 18px;
+    }
+
+    #prod-nome {
+        font-size: 20px;
+    }
+
+    .preco-tag {
+        font-size: 17px;
+        padding: 3px 10px;
+    }
+
+    .pills {
+        gap: 6px;
+    }
+
+    .pill {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+
+    .meio {
+        gap: 15px;
+        margin: 14px 0 8px;
+    }
+
+    .meio button {
+        width: 42px;
+        height: 42px;
+        font-size: 22px;
+    }
+
+    .rodape {
+        height: 62px;
+    }
+
+    .link {
+        font-size: 16px;
+    }
+}
