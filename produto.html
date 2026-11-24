@@ -97,7 +97,8 @@
             cappuccino: { nome: "Cappuccino Cremoso", cat: "Café Especial Artesanal", desc: "Espresso, leite vaporizado cremoso e canela polvilhada.", preco: 14, img: "img/Frame 5.jpg?v=2", eBebida: true },
             frappe: { nome: "Frappé de Caramelo", cat: "Bebida Gelada & Batida", desc: "Café gelado batido, calda toffee artesanal e chantilly.", preco: 18, img: "img/Frame 2.jpg?v=2", eBebida: true },
             icecoffee: { nome: "Ice Coffee Belga", cat: "Especial Gelado da Casa", desc: "Cold Brew com ganache de puro chocolate belga e gelo.", preco: 16, img: "img/Frame 9.jpg?v=2", eBebida: true },
-            espresso: { nome: "Espresso Tradicional", cat: "100% Grãos Nobres Arábica", desc: "Grãos selecionados moídos na hora com crema espessa e dourada.", preco: 8, img: "img/Frame 4.jpg?v=2", eBebida: true },
+            espresso: { nome: "Expresso Tradicional", cat: "100% Grãos Nobres Arábica", desc: "Grãos selecionados moídos na hora com crema espessa e dourada.", preco: 8, img: "img/Frame 4.jpg?v=2", eBebida: true },
+            expresso: { nome: "Expresso Tradicional", cat: "100% Grãos Nobres Arábica", desc: "Grãos selecionados moídos na hora com crema espessa e dourada.", preco: 8, img: "img/Frame 4.jpg?v=2", eBebida: true },
             croissant: { nome: "Croissant Francês", cat: "Confeitaria Artesanal", desc: "Folhado crocante por fora e macio por dentro.", preco: 15, img: "img/croissant.jpg", eBebida: false },
             cookie: { nome: "Cookie Triplo Chocolate", cat: "Confeitaria Artesanal", desc: "Massa macia com gotas fartas de chocolate meio amargo e ao leite.", preco: 12, img: "img/cookie.jpg", eBebida: false },
             cheesecake: { nome: "Cheesecake de Frutas", cat: "Sobremesa Especial", desc: "Creme suave com calda caseira de frutas vermelhas.", preco: 19, img: "img/cheesecake.jpg", eBebida: false },
@@ -114,6 +115,7 @@
         document.getElementById('prod-cat').innerText = itemAtual.cat;
         document.getElementById('prod-desc').innerText = itemAtual.desc;
         document.getElementById('prod-img').src = itemAtual.img;
+        document.getElementById('preco-base-tag').innerText = 'R$ ' + itemAtual.preco.toFixed(2).replace('.', ',');
 
         const mesaAtual = localStorage.getItem('aroma_mesa_atual') || 'Mesa 05';
         const nomeAtual = localStorage.getItem('aroma_cliente_nome') || 'Cliente';

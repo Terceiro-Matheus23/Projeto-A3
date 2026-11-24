@@ -184,6 +184,14 @@ let ultimo = JSON.parse(
     localStorage.getItem('aroma_ultimo_pedido') || 'null'
 );
 
+// Se não houver último pedido gravado, busca o mais recente na lista de pedidos da cozinha
+if (!ultimo) {
+    const pedidosCozinha = JSON.parse(localStorage.getItem('aroma_pedidos_cozinha') || '[]');
+    if (pedidosCozinha.length > 0) {
+        ultimo = pedidosCozinha[0];
+    }
+}
+
 const nomeCliente =
     (ultimo && ultimo.cliente) ||
     localStorage.getItem('aroma_cliente_nome') ||
@@ -194,12 +202,12 @@ const mesaCliente =
     localStorage.getItem('aroma_mesa_atual') ||
     'Mesa 05';
 
-document.getElementById('titulo-sucesso').innerText =
-    nomeCliente !== 'Cliente'
-        ? `Pedido de ${nomeCliente} Enviado!`
-        : 'Pedido Enviado para a Cozinha!';
-
 if (ultimo) {
+    document.getElementById('titulo-sucesso').innerText =
+        nomeCliente !== 'Cliente'
+            ? `Pedido de ${nomeCliente} Enviado!`
+            : 'Pedido Enviado para a Cozinha!';
+
     document.getElementById('pedido-id').innerText = ultimo.id;
 
     document.getElementById('pedido-mesa').innerText =
@@ -216,11 +224,35 @@ if (ultimo) {
 
     document.getElementById('pedido-total').innerText =
         ultimo.total;
+} else {
+    // Estado quando não há nenhum pedido ainda (evita comanda fantasma)
+    const checkElem = document.querySelector('.check-circulo');
+    if (checkElem) checkElem.innerText = '☕';
+    document.getElementById('titulo-sucesso').innerText = 'Comanda sem Pedidos';
+    const tagElem = document.querySelector('.tag-sem-pagamento');
+    if (tagElem) tagElem.innerText = `Autoatendimento • ${mesaCliente}`;
+    document.getElementById('pedido-id').innerText = '-';
+    document.getElementById('pedido-mesa').innerText = `${mesaCliente} • ${nomeCliente}`;
+    document.getElementById('pedido-item').innerText = 'Nenhum pedido ativo no momento';
+    document.getElementById('pedido-specs').innerText = 'Acesse o cardápio para pedir cafés, lanches e doces!';
+    const boxObs = document.getElementById('box-obs');
+    if (boxObs) boxObs.innerText = '💡 Os pedidos feitos na sua mesa aparecerão aqui para acompanhamento.';
+    document.getElementById('pedido-total').innerText = 'R$ 0,00';
+    const dicaElem = document.querySelector('.dica-passo');
+    if (dicaElem) dicaElem.innerText = '💡 Faça seu pedido no cardápio para acompanhar as etapas em tempo real!';
 }
 
 
 // Atualiza as cores dos indicadores da tela do cliente
 function atualizarStatusVisual() {
+    const passos = document.querySelectorAll('.tracker .passo');
+
+    if (!ultimo) {
+        passos.forEach(passo => {
+            passo.classList.remove('ativo', 'concluido');
+        });
+        return;
+    }
 
     const pedidos = JSON.parse(
         localStorage.getItem('aroma_pedidos_cozinha') || '[]'
